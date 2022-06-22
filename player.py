@@ -1,4 +1,5 @@
 from cards import *
+from player_name import *
 
 vec = pygame.math.Vector2
 
@@ -19,18 +20,24 @@ class Player :
         self.two_player = pygame.Rect(500, 350, 300, 200)
         self.three_player = pygame.Rect(900, 350, 300, 200)
 
-
-
-
     def check_click(self, mouse):
         if self.one_player.collidepoint(mouse):
-            print("1 jugador")
+            game_values["PLAYERS"] = 1
+            silent_save_game()
+            n = Name()
+            n.select_name()
 
         elif self.two_player.collidepoint(mouse):
-            print("2 jugadores")
+            game_values["PLAYERS"] = 2
+            silent_save_game()
+            n = Name()
+            n.select_name()
 
         elif self.three_player.collidepoint(mouse):
-            print("3 jugadores")
+            game_values["PLAYERS"] = 3
+            silent_save_game()
+            n = Name()
+            n.select_name()
 
             #if pygame.mouse.get_pressed()[0]:
             
@@ -82,7 +89,7 @@ class Player :
             self.player_control()        
             self.update_mouse_position(delta_time)
             self.draw()
-        pg.quit()
+        pygame.quit()
 
 
 
