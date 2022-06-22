@@ -15,12 +15,11 @@ class Player :
         self.mouse = vec()
         self.mouse_visible = True
         self.clock = pygame.time.Clock()
-        self.font = pygame.freetype.SysFont('arial', size=64)
         self.one_player = pygame.Rect(100, 350, 300, 200)
         self.two_player = pygame.Rect(500, 350, 300, 200)
         self.three_player = pygame.Rect(900, 350, 300, 200)
 
-    
+
 
 
     def check_click(self, mouse):

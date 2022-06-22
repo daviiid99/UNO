@@ -77,8 +77,6 @@ class Main :
         self.mouse = vec()
         self.mouse_visible = True
         self.clock = pygame.time.Clock()
-        self.font = pygame.freetype.SysFont('arial', size=64)
-
 
     def check_click(self, mouse):
         if self.rect.collidepoint(mouse):
