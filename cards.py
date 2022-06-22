@@ -61,6 +61,17 @@ right_2 = pygame.image.load(os.path.join('Assets/main_screen', "right_2.png"))
 right_3 = pygame.image.load(os.path.join('Assets/main_screen', "right_3.png"))
 right_4 = pygame.image.load(os.path.join('Assets/main_screen', "right_4.png"))
 
+# Player Screen
+
+# 1 Player
+player_1 = pygame.image.load(os.path.join('Assets/players_screen', "1_player.png"))
+
+# 2 Players
+player_2 = pygame.image.load(os.path.join('Assets/players_screen', "2_player.png"))
+
+# 3 Players
+player_3 = pygame.image.load(os.path.join('Assets/players_screen', "3_player.png"))
+
 
 # RED
 
