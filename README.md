@@ -9,6 +9,10 @@ UNO card game made with Python and Pygame
 # Screens
 
 <img src="screens/screen.png">
+<img src="screens/screen_2.png">
+<img src="screens/screen_3.png">
+<img src="screens/screen_4.png">
+
 <br/>
 
 
