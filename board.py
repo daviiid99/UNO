@@ -59,6 +59,8 @@ class Board :
         self.card_six_rect = pygame.Rect(800, 400, 241, 361)
         self.card_seven_rect = pygame.Rect(950, 400, 241, 361)
 
+        self.next_turn_rect = pygame.Rect(970, 80, 250, 320)
+
 
     def assign_players(self) :
         players = game_values["PLAYERS"]
@@ -121,18 +123,42 @@ class Board :
 
         self.available_cards -=7
 
+    def next_turn (self) :
+        if self.player_one_turn :
+            if self.player_two_name != '' :
+                self.player_one_turn = False
+                self.player_two_turn = True
+                self.current_turn_pick = False
+
+        elif self.player_two_turn :
+            if self.player_three_name != '' :
+                self.player_two_turn = False
+                self.player_three_turn = True
+                self.current_turn_pick = False
+
+            else :
+                self.player_two_turn = False
+                self.player_one_turn = True
+                self.current_turn_pick = False
+
+
+
+        elif self.player_three_turn :
+            self.player_three_turn = False
+            self.player_one_turn = True
+            self.current_turn_pick = False
+
+
     def check_click(self, mouse):
         # Check if the user is looking for the previous cards
         if self.previous.collidepoint(mouse) :
             self.previous_seven = True
             self.next_seven = False
-            print("Retrocediendo")
 
         # Check if the user is looking for the next cards
         elif self.next.collidepoint(mouse) :
             self.next_seven = True
             self.previous_seven = False
-            print("avanzando")
 
         # Check if the user is using the deck
         elif self.deck.collidepoint(mouse) :
@@ -140,8 +166,12 @@ class Board :
                 self.pick_card()
                 self.current_turn_pick = True
 
+        # Check if the user colliderect with the next turn button
+        elif self.next_turn_rect.collidepoint(mouse) :
+            self.next_turn()
+
+
         elif self.card_one_rect.collidepoint(mouse) :
-            print("Soy la carta uno")
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -153,6 +183,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_one)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_one = self.player_one_cards[7]
@@ -163,10 +196,65 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_one)
 
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_one = self.player_two_cards[0]
+
+                    # Replace the card
+                    self.random_card = card_one
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_one)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_one = self.player_two_cards[7]
+
+                    # Replace the card
+                    self.random_card = card_one
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_one)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_one = self.player_three_cards[0]
+
+                    # Replace the card
+                    self.random_card = card_one
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_one)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_one = self.player_three_cards[7]
+
+                    # Replace the card
+                    self.random_card = card_one
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_one)
+
+                    # Next turn
+                    self.next_turn()
+
 
         elif self.card_two_rect.collidepoint(mouse) :
-            print("Soy la carta dos")
-
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -178,6 +266,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_two)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_two = self.player_one_cards[8]
@@ -188,9 +279,64 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_two)
 
-        elif self.card_three_rect.collidepoint(mouse) :
-            print("Soy la carta tres")
+                    # Next turn
+                    self.next_turn()
 
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_two = self.player_two_cards[1]
+
+                    # Replace the card
+                    self.random_card = card_two
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_two)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_two = self.player_two_cards[8]
+
+                    # Replace the card
+                    self.random_card = card_two
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_two)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_two = self.player_three_cards[1]
+
+                    # Replace the card
+                    self.random_card = card_two
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_two)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_two = self.player_three_cards[8]
+
+                    # Replace the card
+                    self.random_card = card_two
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_two)
+
+                    # Next turn
+                    self.next_turn()
+
+        elif self.card_three_rect.collidepoint(mouse) :
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -202,6 +348,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_three)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_three = self.player_one_cards[9]
@@ -212,9 +361,64 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_three)
 
-        elif self.card_four_rect.collidepoint(mouse) :
-            print("Soy la carta cuatro")
+                    # Next turn
+                    self.next_turn()
 
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_three = self.player_two_cards[2]
+
+                    # Replace the card
+                    self.random_card = card_three
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_three)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_three = self.player_two_cards[9]
+
+                    # Replace the card
+                    self.random_card = card_three
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_three)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_three = self.player_three_cards[2]
+
+                    # Replace the card
+                    self.random_card = card_three
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_three)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_three = self.player_three_cards[9]
+
+                    # Replace the card
+                    self.random_card = card_three
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_three)
+
+                    # Next turn
+                    self.next_turn()
+
+        elif self.card_four_rect.collidepoint(mouse) :
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -226,6 +430,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_four)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_four = self.player_one_cards[10]
@@ -236,9 +443,64 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_four)
 
-        elif self.card_five_rect.collidepoint(mouse) :
-            print("Soy la carta cinco")
+                    # Next turn
+                    self.next_turn()
 
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_four = self.player_two_cards[3]
+
+                    # Replace the card
+                    self.random_card = card_four
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_four)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_four = self.player_two_cards[10]
+
+                    # Replace the card
+                    self.random_card = card_four
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_four)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_four = self.player_three_cards[3]
+
+                    # Replace the card
+                    self.random_card = card_four
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_four)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_four = self.player_three_cards[10]
+
+                    # Replace the card
+                    self.random_card = card_four
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_four)
+
+                    # Next turn
+                    self.next_turn()
+
+        elif self.card_five_rect.collidepoint(mouse) :
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -250,6 +512,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_five)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_five = self.player_one_cards[11]
@@ -260,9 +525,64 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_five)
 
-        elif self.card_six_rect.collidepoint(mouse) :
-            print("Soy la carta seis")
+                    # Next turn
+                    self.next_turn()
 
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_five = self.player_two_cards[4]
+
+                    # Replace the card
+                    self.random_card = card_five
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_five)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_five = self.player_two_cards[11]
+
+                    # Replace the card
+                    self.random_card = card_five
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_five)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_five = self.player_three_cards[4]
+
+                    # Replace the card
+                    self.random_card = card_five
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_five)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_five = self.player_three_cards[11]
+
+                    # Replace the card
+                    self.random_card = card_five
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_five)
+
+                    # Next turn
+                    self.next_turn()
+
+        elif self.card_six_rect.collidepoint(mouse) :
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -274,6 +594,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_six)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_six = self.player_one_cards[12]
@@ -284,9 +607,64 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_six)
 
-        elif self.card_seven_rect.collidepoint(mouse) :
-            print("Soy la carta siete")
+                    # Next turn
+                    self.next_turn()
 
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_six = self.player_two_cards[5]
+
+                    # Replace the card
+                    self.random_card = card_six
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_six)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_six = self.player_two_cards[12]
+
+                    # Replace the card
+                    self.random_card = card_six
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_six)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_six = self.player_three_cards[5]
+
+                    # Replace the card
+                    self.random_card = card_six
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_six)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_six = self.player_three_cards[12]
+
+                    # Replace the card
+                    self.random_card = card_six
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_six)
+
+                    # Next turn
+                    self.next_turn()
+
+        elif self.card_seven_rect.collidepoint(mouse) :
             if self.player_one_turn :
                 if self.previous_seven :
                     # Assign the card
@@ -298,6 +676,9 @@ class Board :
                     # Remove the card from the player
                     self.player_one_cards.remove(card_seven)
 
+                    # Next turn
+                    self.next_turn()
+
                 elif self.next_seven :
                     # Assign the card
                     card_seven = self.player_one_cards[13]
@@ -307,6 +688,63 @@ class Board :
 
                     # Remove the card from the player
                     self.player_one_cards.remove(card_seven)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_two_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_seven = self.player_two_cards[6]
+
+                    # Replace the card
+                    self.random_card = card_seven
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_seven)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_seven = self.player_two_cards[13]
+
+                    # Replace the card
+                    self.random_card = card_seven
+
+                    # Remove the card from the player
+                    self.player_two_cards.remove(card_seven)
+
+                    # Next turn
+                    self.next_turn()
+
+            elif self.player_three_turn :
+                if self.previous_seven :
+                    # Assign the card
+                    card_seven = self.player_three_cards[6]
+
+                    # Replace the card
+                    self.random_card = card_seven
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_seven)
+
+                    # Next turn
+                    self.next_turn()
+
+                elif self.next_seven :
+                    # Assign the card
+                    card_seven = self.player_three_cards[13]
+
+                    # Replace the card
+                    self.random_card = card_seven
+
+                    # Remove the card from the player
+                    self.player_three_cards.remove(card_seven)
+
+                    # Next turn
+                    self.next_turn()
 
 
     def pick_card (self) :
@@ -364,6 +802,7 @@ class Board :
         self.screen.blit(cards_deck, (260, 50))
         card = pygame.transform.scale(self.random_card, (200, 300))
         self.screen.blit(card, (570, 75))
+        self.screen.blit(next_turn, (970, 80))
 
         if self.player_one_turn :
 
@@ -400,20 +839,64 @@ class Board :
         elif self.player_two_turn :
 
             player_two = self.font.render(self.player_two_name, 1, self.color)
-            self.screen.blit(player_one, (800, 20))
+            cards = count_font.render("Your Cards : %d " % len(self.player_two_cards), 1, self.color)
+            self.screen.blit(cards, (850, 60))
+            self.screen.blit(player_two, (50, 20))
 
-            for card in self.player_two_cards :
-                self.card_witdh +=50
-                self.screen.blit(card, (self.card_witdh, self.card_height) )
+        
+            if self.next_seven :
+
+                width = 20
+                count = 0
+              
+                for card in self.player_two_cards :
+                    if count >= 7 and count < 14 :
+                        self.screen.blit(card, (50 + width , 400))
+                        width +=150
+                    count +=1
+
+
+            elif self.previous_seven :
+
+                width = 20
+                count = 0
+
+                for card in self.player_two_cards :
+                    if count < 7 :
+                        self.screen.blit(card, (50 + width , 400))
+                    count +=1
+                    width +=150
 
         elif self.player_three_turn :
 
             player_three = self.font.render(self.player_three_name, 1, self.color)
-            self.screen.blit(player_three, (50, 500))
+            cards = count_font.render("Your Cards : %d " % len(self.player_three_cards), 1, self.color)
+            self.screen.blit(cards, (850, 60))
+            self.screen.blit(player_three, (50, 20))
 
-            for card in self.player_three_cards :
-                self.card_witdh +=50
-                self.screen.blit(card, (self.card_witdh, self.card_height) )
+        
+            if self.next_seven :
+
+                width = 20
+                count = 0
+              
+                for card in self.player_three_cards :
+                    if count >= 7 and count < 14 :
+                        self.screen.blit(card, (50 + width , 400))
+                        width +=150
+                    count +=1
+
+
+            elif self.previous_seven :
+
+                width = 20
+                count = 0
+
+                for card in self.player_three_cards :
+                    if count < 7 :
+                        self.screen.blit(card, (50 + width , 400))
+                    count +=1
+                    width +=150
 
         # Controller
         #pygame.draw.rect(self.screen, self.color, self.next)
@@ -430,6 +913,10 @@ class Board :
         #pygame.draw.rect(self.screen, self.color, self.card_five_rect)
         #pygame.draw.rect(self.screen, self.color, self.card_six_rect)
         #pygame.draw.rect(self.screen, self.color, self.card_seven_rect)
+
+        # Next Turn
+        #pygame.draw.rect(self.screen, self.color, self.next_turn_rect)
+
 
         pygame.display.update()
 
@@ -448,6 +935,7 @@ class Board :
                 self.available_card()
                 self.draw_board()
                 self.player_control()
+
 
         pygame.quit()
                 

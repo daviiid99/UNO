@@ -85,6 +85,7 @@ class Player :
 
     def select_players (self) :
         while self.running:
+            theme.play()
             delta_time = self.clock.tick() / 1000
             self.player_control()        
             self.update_mouse_position(delta_time)
