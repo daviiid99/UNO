@@ -83,6 +83,12 @@ class Board :
 
         self.available_cards = count
 
+    def assign_first_card(self) :
+
+        random_card = randint(0, len(self.game_cards))
+        self.random_card = self.game_cards[random_card]
+        self.game_cards.remove(self.random_card)
+
     def first_turn_cards_assign(self) :
         if self.player_one_name != '' :
             self.first_turn_cards_picks(self.player_one_cards)
@@ -366,8 +372,7 @@ class Board :
             self.screen.blit(cards, (850, 60))
             self.screen.blit(player_one, (50, 20))
 
-            
-
+        
             if self.next_seven :
 
                 width = 20
@@ -378,8 +383,7 @@ class Board :
                         self.screen.blit(card, (50 + width , 400))
                         width +=150
                     count +=1
-                   
-                    
+
 
             elif self.previous_seven :
 
@@ -392,7 +396,6 @@ class Board :
                     count +=1
                     width +=150
                        
-
 
         elif self.player_two_turn :
 
@@ -437,10 +440,12 @@ class Board :
                 self.available_card()
                 self.assign_players()
                 self.first_turn_cards_assign()
+                self.assign_first_card()
 
 
             elif self.available_cards > 0 :
                 #self.pick_card()
+                self.available_card()
                 self.draw_board()
                 self.player_control()
 
