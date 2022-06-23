@@ -1,6 +1,9 @@
 from cards import *
 from random import randint
 from save_game import *
+import threading
+import time
+
 
 vec = pygame.math.Vector2
 
@@ -15,6 +18,7 @@ class Board :
         self.font = pygame.font.Font(None, 100)
         self.color = pygame.Color('white')
         self.screen = WIN
+        self.timer_Screen = WIN
         self.rect = self.screen.get_rect()
         self.mouse = vec()
         self.mouse_visible = True
@@ -60,6 +64,7 @@ class Board :
         self.card_seven_rect = pygame.Rect(950, 400, 241, 361)
 
         self.next_turn_rect = pygame.Rect(970, 80, 250, 320)
+        self.timer = 30
 
 
     def assign_players(self) :
@@ -136,10 +141,12 @@ class Board :
                 self.player_three_turn = True
                 self.current_turn_pick = False
 
+
             else :
                 self.player_two_turn = False
                 self.player_one_turn = True
                 self.current_turn_pick = False
+
 
 
 
@@ -168,6 +175,7 @@ class Board :
 
         # Check if the user colliderect with the next turn button
         elif self.next_turn_rect.collidepoint(mouse) :
+            self.timer = 30
             self.next_turn()
 
 
@@ -762,6 +770,8 @@ class Board :
         # Assign the card to the player
         player.append(random_card)
 
+        self.available_card()
+
 
     def current_player (self) :
 
@@ -777,165 +787,234 @@ class Board :
 
     def player_control(self) :
 
-        for event in pygame.event.get() :
-            # Closes the game
-            if event.type == pygame.QUIT:
-                self.running = False
+        while game_values["START"]["TURN"] == "NO" :
 
-            elif event.type == pygame.KEYDOWN :
-                if event.key == pygame.K_m :
-                    # Changes the mouse visibility
-                    self.mouse_visible = not self.mouse_visible
-                    pygame.mouse.set_visible(self.mouse_visible)
+            for event in pygame.event.get() :
+                # Closes the game
+                if event.type == pygame.QUIT:
+                    self.running = False
 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                self.check_click(event.pos)
+                elif event.type == pygame.KEYDOWN :
+                    if event.key == pygame.K_m :
+                        # Changes the mouse visibility
+                        self.mouse_visible = not self.mouse_visible
+                        pygame.mouse.set_visible(self.mouse_visible)
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    self.check_click(event.pos)
+
+    def backward (self) :
+
+        while game_values["START"]["TURN"] == "NO" :
+
+            if self.player_one_turn :
+
+                if self.timer > 0  :
+                    time = count_font.render("Time : %d " % self.timer, 1, self.color)
+                    self.timer_Screen.blit(time, (500, 20))
+                    self.timer -=1
+                    clock.tick(1)
+                
+                if self.timer == 0:
+                    self.timer = 30
+                    self.next_turn()
+                    
+
+            elif self.player_two_turn :
+                if self.timer > 0  :
+                    time = count_font.render("Time : %d " % self.timer, 1, self.color)
+                    self.timer_Screen.blit(time, (500, 20))
+                    self.timer -=1
+                    clock.tick(1)
+                
+                if self.timer == 0:
+                    self.timer = 30
+                    self.next_turn()
+
+            elif self.player_three_turn :
+
+                if self.timer > 0  :
+                    time = count_font.render("Time : %d " % self.timer, 1, self.color)
+                    self.timer_Screen.blit(time, (500, 20))
+                    self.timer -=1
+                    clock.tick(1)
+                
+                if self.timer == 0:
+                    self.timer = 30
+                    self.next_turn()
+
 
 
     def draw_board(self) :
 
-        self.screen.fill("#ee2229")
-        
-        cards = count_font.render("Available Cards : %d " % self.available_cards, 1, self.color)
-        self.screen.blit(cards, (850, 20))
-        
-        self.screen.blit(cards_deck, (260, 50))
-        card = pygame.transform.scale(self.random_card, (200, 300))
-        self.screen.blit(card, (570, 75))
-        self.screen.blit(next_turn, (970, 80))
+        while game_values["START"]["TURN"] == "NO" :
 
-        if self.player_one_turn :
+            self.screen.fill("#ee2229")
+            
+            cards = count_font.render("Available Cards : %d " % self.available_cards, 1, self.color)
+            self.screen.blit(cards, (850, 20))
+            
+            self.screen.blit(cards_deck, (260, 50))
+            card = pygame.transform.scale(self.random_card, (200, 300))
+            self.screen.blit(card, (570, 75))
+            self.screen.blit(next_turn, (970, 80))
 
-            player_one = self.font.render(self.player_one_name, 1, self.color)
-            cards = count_font.render("Your Cards : %d " % len(self.player_one_cards), 1, self.color)
-            self.screen.blit(cards, (850, 60))
-            self.screen.blit(player_one, (50, 20))
+            if self.player_one_turn :
 
-        
-            if self.next_seven :
+                time = count_font.render("Time : %d " % self.timer, 1, self.color)
+                self.timer_Screen.blit(time, (500, 20))
 
-                width = 20
-                count = 0
-              
-                for card in self.player_one_cards :
-                    if count >= 7 and count < 14 :
-                        self.screen.blit(card, (50 + width , 400))
+                player_one = self.font.render(self.player_one_name, 1, self.color)
+                cards = count_font.render("Your Cards : %d " % len(self.player_one_cards), 1, self.color)
+                self.screen.blit(cards, (850, 60))
+                self.screen.blit(player_one, (50, 20))
+
+            
+                if self.next_seven :
+
+                    width = 20
+                    count = 0
+                  
+                    for card in self.player_one_cards :
+                        if count >= 7 and count < 14 :
+                            self.screen.blit(card, (50 + width , 400))
+                            width +=150
+                        count +=1
+
+
+                elif self.previous_seven :
+
+                    width = 20
+                    count = 0
+
+                    for card in self.player_one_cards :
+                        if count < 7 :
+                            self.screen.blit(card, (50 + width , 400))
+                        count +=1
                         width +=150
-                    count +=1
+                           
+
+            elif self.player_two_turn :
+
+                time = count_font.render("Time : %d " % self.timer, 1, self.color)
+                self.timer_Screen.blit(time, (500, 20))
+
+                player_two = self.font.render(self.player_two_name, 1, self.color)
+                cards = count_font.render("Your Cards : %d " % len(self.player_two_cards), 1, self.color)
+                self.screen.blit(cards, (850, 60))
+                self.screen.blit(player_two, (50, 20))
+
+            
+                if self.next_seven :
+
+                    width = 20
+                    count = 0
+                  
+                    for card in self.player_two_cards :
+                        if count >= 7 and count < 14 :
+                            self.screen.blit(card, (50 + width , 400))
+                            width +=150
+                        count +=1
 
 
-            elif self.previous_seven :
+                elif self.previous_seven :
 
-                width = 20
-                count = 0
+                    width = 20
+                    count = 0
 
-                for card in self.player_one_cards :
-                    if count < 7 :
-                        self.screen.blit(card, (50 + width , 400))
-                    count +=1
-                    width +=150
-                       
-
-        elif self.player_two_turn :
-
-            player_two = self.font.render(self.player_two_name, 1, self.color)
-            cards = count_font.render("Your Cards : %d " % len(self.player_two_cards), 1, self.color)
-            self.screen.blit(cards, (850, 60))
-            self.screen.blit(player_two, (50, 20))
-
-        
-            if self.next_seven :
-
-                width = 20
-                count = 0
-              
-                for card in self.player_two_cards :
-                    if count >= 7 and count < 14 :
-                        self.screen.blit(card, (50 + width , 400))
+                    for card in self.player_two_cards :
+                        if count < 7 :
+                            self.screen.blit(card, (50 + width , 400))
+                        count +=1
                         width +=150
-                    count +=1
+
+            elif self.player_three_turn :
+
+                time = count_font.render("Time : %d " % self.timer, 1, self.color)
+                self.timer_Screen.blit(time, (500, 20))
+
+                player_three = self.font.render(self.player_three_name, 1, self.color)
+                cards = count_font.render("Your Cards : %d " % len(self.player_three_cards), 1, self.color)
+                self.screen.blit(cards, (850, 60))
+                self.screen.blit(player_three, (50, 20))
+
+            
+                if self.next_seven :
+
+                    width = 20
+                    count = 0
+                  
+                    for card in self.player_three_cards :
+                        if count >= 7 and count < 14 :
+                            self.screen.blit(card, (50 + width , 400))
+                            width +=150
+                        count +=1
 
 
-            elif self.previous_seven :
+                elif self.previous_seven :
 
-                width = 20
-                count = 0
+                    width = 20
+                    count = 0
 
-                for card in self.player_two_cards :
-                    if count < 7 :
-                        self.screen.blit(card, (50 + width , 400))
-                    count +=1
-                    width +=150
-
-        elif self.player_three_turn :
-
-            player_three = self.font.render(self.player_three_name, 1, self.color)
-            cards = count_font.render("Your Cards : %d " % len(self.player_three_cards), 1, self.color)
-            self.screen.blit(cards, (850, 60))
-            self.screen.blit(player_three, (50, 20))
-
-        
-            if self.next_seven :
-
-                width = 20
-                count = 0
-              
-                for card in self.player_three_cards :
-                    if count >= 7 and count < 14 :
-                        self.screen.blit(card, (50 + width , 400))
+                    for card in self.player_three_cards :
+                        if count < 7 :
+                            self.screen.blit(card, (50 + width , 400))
+                        count +=1
                         width +=150
-                    count +=1
+
+            # Controller
+            #pygame.draw.rect(self.screen, self.color, self.next)
+            self.screen.blit(next_cursor, (self.next.x, self.next.y))
+            #pygame.draw.rect(self.screen, self.color, self.previous)
+            self.screen.blit(previous_cursor, (self.previous.x, self.previous.y))
+            #pygame.draw.rect(self.screen, self.color, self.deck)
+
+            # Cards
+            #pygame.draw.rect(self.screen, self.color, self.card_one_rect)
+            #pygame.draw.rect(self.screen, self.color, self.card_two_rect)
+            #pygame.draw.rect(self.screen, self.color, self.card_three_rect)
+            #pygame.draw.rect(self.screen, self.color, self.card_four_rect)
+            #pygame.draw.rect(self.screen, self.color, self.card_five_rect)
+            #pygame.draw.rect(self.screen, self.color, self.card_six_rect)
+            #pygame.draw.rect(self.screen, self.color, self.card_seven_rect)
+
+            # Next Turn
+            #pygame.draw.rect(self.screen, self.color, self.next_turn_rect)
 
 
-            elif self.previous_seven :
-
-                width = 20
-                count = 0
-
-                for card in self.player_three_cards :
-                    if count < 7 :
-                        self.screen.blit(card, (50 + width , 400))
-                    count +=1
-                    width +=150
-
-        # Controller
-        #pygame.draw.rect(self.screen, self.color, self.next)
-        self.screen.blit(next_cursor, (self.next.x, self.next.y))
-        #pygame.draw.rect(self.screen, self.color, self.previous)
-        self.screen.blit(previous_cursor, (self.previous.x, self.previous.y))
-        #pygame.draw.rect(self.screen, self.color, self.deck)
-
-        # Cards
-        #pygame.draw.rect(self.screen, self.color, self.card_one_rect)
-        #pygame.draw.rect(self.screen, self.color, self.card_two_rect)
-        #pygame.draw.rect(self.screen, self.color, self.card_three_rect)
-        #pygame.draw.rect(self.screen, self.color, self.card_four_rect)
-        #pygame.draw.rect(self.screen, self.color, self.card_five_rect)
-        #pygame.draw.rect(self.screen, self.color, self.card_six_rect)
-        #pygame.draw.rect(self.screen, self.color, self.card_seven_rect)
-
-        # Next Turn
-        #pygame.draw.rect(self.screen, self.color, self.next_turn_rect)
-
-
-        pygame.display.update()
+            pygame.display.flip()
 
 
     def playing(self) :
+
+        if self.available_cards == 0 :
+            self.available_card()
+            self.assign_players()
+            self.first_turn_cards_assign()
+            self.assign_first_card()
+
+
         while self.running :
-            if self.available_cards == 0 :
-                self.available_card()
-                self.assign_players()
-                self.first_turn_cards_assign()
-                self.assign_first_card()
 
+            t1 = threading.Thread(target = self.available_card, name="t1")
+            t2 = threading.Thread(target = self.draw_board , name="t2")
+            t3 = threading.Thread(target = self.player_control , name="t2")
+            t4 = threading.Thread(target = self.backward , name="t2")
+                
+            t1.start()
+            t2.start()
+            t3.start()
+            t4.start()
 
-            elif self.available_cards > 0 :
-                #self.pick_card()
-                self.available_card()
-                self.draw_board()
-                self.player_control()
+            start = self.player_control()
+                
 
+            while game_values["START"]["TURN"] == "NO":
+                t1.join()
+                t2.join()
+                t3.join()
+                t4.join()
+            
 
         pygame.quit()
                 
