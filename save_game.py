@@ -2,8 +2,6 @@ import os
 import json
 from cards import *
 
-
-
 def silent_save_game () :
 	saving = True
 	my_save_slot = json.dumps(game_values)

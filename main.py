@@ -63,6 +63,19 @@ def create_title_screen_animation (LEFT_CARD, CENTER_CARD, RIGHT_CARD) :
     WIN.blit(RIGHT_CARD, (680, 340))
     WIN.blit(CENTER_CARD, (450, 280))
 
+    copyright = small_font.render("©1971-2022 MATTEL, INC", 1, WHITE)
+    WIN.blit(copyright, (20, 600) )
+
+    copyright = mini_font.render("UNO brand, logo and assets", 1, WHITE)
+    WIN.blit(copyright, (1060, 580) )
+
+    copyright = mini_font.render("are registered by MATTEL", 1, WHITE)
+    WIN.blit(copyright, (1060, 600) )
+
+    copyright = mini_font.render("in the United States", 1, WHITE)
+    WIN.blit(copyright, (1060, 620) )
+
+
     clock.tick(1)
 
     pygame.display.update()

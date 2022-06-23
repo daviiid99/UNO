@@ -1,5 +1,6 @@
 from cards import *
 from save_game import *
+from board import *
 
 vec = pygame.math.Vector2
 
@@ -34,6 +35,7 @@ class Name :
         self.player_one = 0
         self.player_two = 0
         self.player_three = 0
+
 
 
     def check_click(self, mouse):
@@ -154,6 +156,11 @@ class Name :
             self.player_control()        
             self.update_mouse_position(delta_time)
             self.draw()
+
+        if self.name == 0 :
+            b = Board()
+            b.playing()
+
 
     
         pygame.quit()
