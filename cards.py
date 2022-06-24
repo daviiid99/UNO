@@ -49,10 +49,12 @@ game_values = json.load(my_save_slot)
 logo = pygame.image.load(os.path.join('Assets/logo', "logo.png"))
 
 # Board Assets
-cards_deck = pygame.transform.scale(pygame.image.load(os.path.join('Assets/logo', "deck.png")), (320,361))
+cards_deck = pygame.transform.scale(pygame.image.load(os.path.join('Assets/logo', "deck.png")), (200,300))
 next_cursor = pygame.transform.scale(pygame.image.load(os.path.join('Assets/cursor', "next.png")), (50,50))
 previous_cursor = pygame.transform.scale(pygame.image.load(os.path.join('Assets/cursor', "previous.png")), (50,50))
-next_turn = pygame.transform.scale(pygame.image.load(os.path.join('Assets/cursor', "next_turn.png")), (250,320))
+next_turn = pygame.transform.scale(pygame.image.load(os.path.join('Assets/cursor', "next_turn.png")), (200,270))
+uno_player = pygame.transform.scale(pygame.image.load(os.path.join('Assets/cursor', "UNO.png")), (200,270))
+colors = pygame.transform.scale(pygame.image.load(os.path.join('Assets/board', "colors.png")), (500,500))
 
 # Left card
 left = pygame.image.load(os.path.join('Assets/main_screen', "left.png"))

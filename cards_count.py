@@ -18,6 +18,7 @@ game_cards.remove(red_1)
 game_cards.remove(red_1)
 
 for card in game_cards :
+	print(str(card))
 	count +=1
 
 print("Hay %d cartas" % count)

@@ -16,18 +16,12 @@ class Player :
         self.mouse = vec()
         self.mouse_visible = True
         self.clock = pygame.time.Clock()
-        self.one_player = pygame.Rect(100, 350, 300, 200)
-        self.two_player = pygame.Rect(500, 350, 300, 200)
-        self.three_player = pygame.Rect(900, 350, 300, 200)
+        self.two_player = pygame.Rect(300, 350, 300, 200)
+        self.three_player = pygame.Rect(700, 350, 300, 200)
 
     def check_click(self, mouse):
-        if self.one_player.collidepoint(mouse):
-            game_values["PLAYERS"] = 1
-            silent_save_game()
-            n = Name()
-            n.select_name()
 
-        elif self.two_player.collidepoint(mouse):
+        if self.two_player.collidepoint(mouse):
             game_values["PLAYERS"] = 2
             silent_save_game()
             n = Name()
@@ -67,10 +61,6 @@ class Player :
     def draw(self):
         self.screen.fill("#ee2229")
         self.screen.blit(logo, (500, 20))
-
-        # 1 Player Rect
-        #pygame.draw.rect(WIN, BLACK, self.one_player)
-        WIN.blit(player_1, (self.one_player.x, self.one_player.y))
 
         # 2 Player Rect
         #pygame.draw.rect(WIN, BLACK, self.two_player)
