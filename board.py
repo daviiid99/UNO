@@ -649,11 +649,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_one_name and "4" in card_one_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_one_name :
@@ -695,11 +693,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_one_name and "4" in card_one_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_one_name :
@@ -744,11 +740,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_one_name and "4" in card_one_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
 
                             # Next turn
@@ -758,7 +752,7 @@ class Board :
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_one_name and "skip" not in card_one_name   :
+                            elif "reverse" not in card_one_name and "skip" not in card_one_name and "draw" not in card_one_name    :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -793,11 +787,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_one_name and "4" in card_one_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_one_name :
@@ -806,7 +798,7 @@ class Board :
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_one_name and "skip" not in card_one_name   :
+                            elif "reverse" not in card_one_name and "skip" not in card_one_name and "draw" not in card_one_name   :
                                 self.next_turn()
 
 
@@ -891,11 +883,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_two_name and "4" in card_two_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_two_name :
@@ -940,11 +930,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_two_name and "4" in card_two_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_two_name :
@@ -988,11 +976,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_two_name and "4" in card_two_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_two_name :
@@ -1037,11 +1023,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_two_name and "4" in card_two_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_two_name :
@@ -1050,7 +1034,7 @@ class Board :
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_two_name and "skip" not in card_two_name   :
+                            elif "reverse" not in card_two_name and "skip" not in card_two_name and "draw" not in card_two_name   :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -1085,11 +1069,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_two_name and "4" in card_two_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_two_name :
@@ -1098,7 +1080,7 @@ class Board :
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_three_name and "skip" not in card_three_name   :
+                            elif "reverse" not in card_two_name and "skip" not in card_two_name and "draw" not in card_two_name   :
                                 self.next_turn()
 
         elif self.card_three_rect.collidepoint(mouse) :
@@ -1228,11 +1210,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_three_name and "4" in card_three_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_three_name :
@@ -1276,11 +1256,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_three_name and "4" in card_three_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_three_name :
@@ -1325,11 +1303,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_three_name and "4" in card_three_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_three_name :
@@ -1338,7 +1314,7 @@ class Board :
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_three_name and "skip" not in card_three_name   :
+                            elif "reverse" not in card_three_name and "skip" not in card_three_name and "draw" not in card_three_name   :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -1373,11 +1349,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_three_name and "4" in card_three_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_three_name :
@@ -1386,7 +1360,7 @@ class Board :
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_three_name and "skip" not in card_three_name   :
+                            elif "reverse" not in card_three_name and "skip" not in card_three_name and "draw" not in card_three_name   :
                                 self.next_turn()
 
         elif self.card_four_rect.collidepoint(mouse) :
@@ -1470,11 +1444,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_four_name and "4" in card_four_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_four_name :
@@ -1519,11 +1491,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_four_name and "4" in card_four_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_four_name :
@@ -1567,11 +1537,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_four_name and "4" in card_four_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_four_name :
@@ -1616,11 +1584,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_four_name and "4" in card_four_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_four_name :
@@ -1629,7 +1595,7 @@ class Board :
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_four_name and "skip" not in card_four_name   :
+                            elif "reverse" not in card_four_name and "skip" not in card_four_name and "draw" not in card_four_name   :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -1664,11 +1630,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_four_name and "4" in card_four_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                         # Next turn
                             if "skip" in card_four_name :
@@ -1677,7 +1641,7 @@ class Board :
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_four_name and "skip" not in card_four_name   :
+                            elif "reverse" not in card_four_name and "skip" not in card_four_name and "draw" not in card_four_name   :
                                 self.next_turn()
 
         elif self.card_five_rect.collidepoint(mouse) :
@@ -1761,11 +1725,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_five_name and "4" in card_five_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_five_name :
@@ -1810,11 +1772,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_five_name and "4" in card_five_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_five_name :
@@ -1858,11 +1818,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_five_name and "4" in card_five_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_five_name :
@@ -1908,11 +1866,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_five_name and "4" in card_five_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_five_name :
@@ -1921,7 +1877,7 @@ class Board :
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_five_name and "skip" not in card_five_name   :
+                            elif "reverse" not in card_five_name and "skip" not in card_five_name and "draw" not in card_five_name   :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -1956,11 +1912,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_five_name and "4" in card_five_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_five_name :
@@ -1969,7 +1923,7 @@ class Board :
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_five_name and "skip" not in card_five_name   :
+                            elif "reverse" not in card_five_name and "skip" not in card_five_name and "draw" not in card_five_name   :
                                 self.next_turn()
 
         elif self.card_six_rect.collidepoint(mouse) :
@@ -2054,11 +2008,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_six_name and "4" in card_six_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_six_name :
@@ -2104,11 +2056,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_six_name and "4" in card_six_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_six_name :
@@ -2152,11 +2102,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_six_name and "4" in card_six_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_six_name :
@@ -2201,11 +2149,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_six_name and "4" in card_six_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_six_name :
@@ -2214,7 +2160,7 @@ class Board :
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_six_name and "skip" not in card_six_name   :
+                            elif "reverse" not in card_six_name and "skip" not in card_six_name and "draw" not in card_six_name   :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -2248,11 +2194,10 @@ class Board :
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_six_name and "4" in card_six_name :
                                 self.draw_cards(4)
-                                self.next_turn()
+
 
                             # Next turn
                             if "skip" in card_six_name :
@@ -2261,7 +2206,7 @@ class Board :
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_six_name and "skip" not in card_six_name   :
+                            elif "reverse" not in card_six_name and "skip" not in card_six_name and "draw" not in card_six_name   :
                                 self.next_turn()
 
         elif self.card_seven_rect.collidepoint(mouse) :
@@ -2388,11 +2333,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_seven_name and "4" in card_seven_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_seven_name :
@@ -2435,11 +2378,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_seven_name and "4" in card_seven_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_seven_name :
@@ -2483,11 +2424,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_seven_name and "4" in card_seven_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_seven_name :
@@ -2496,7 +2435,7 @@ class Board :
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_seven_name and "skip" not in card_seven_name   :
+                            elif "reverse" not in card_seven_name and "skip" not in card_seven_name and "draw" not in card_seven_name   :
                                 self.next_turn()
 
                 elif self.next_seven :
@@ -2530,11 +2469,9 @@ class Board :
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
                                 self.draw_cards(2)
-                                self.next_turn()
 
                             elif "draw" in card_seven_name and "4" in card_seven_name :
                                 self.draw_cards(4)
-                                self.next_turn()
 
                             # Next turn
                             if "skip" in card_seven_name :
@@ -2543,7 +2480,7 @@ class Board :
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
 
-                            elif "reverse" not in card_seven_name and "skip" not in card_seven_name   :
+                            elif "reverse" not in card_seven_name and "skip" not in card_seven_name and "draw" not in card_seven_name   :
                                 self.next_turn()
 
 
