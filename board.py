@@ -84,8 +84,13 @@ class Board :
         self.timer = 30
 
         self.player_one_uno = False
+        self.player_one_uno_event = False
+
         self.player_two_uno = False
+        self.player_two_uno_event = False
+
         self.player_three_uno = False
+        self.player_three_uno_event = False
 
         self.player_one_points = 0
         self.player_two_points = 0
@@ -2687,6 +2692,11 @@ class Board :
 
             if self.player_one_turn :
 
+                # Checks for loose of UNO condition
+                if len(self.player_one_cards) > 1 and self.player_one_uno_event  :
+                    self.player_one_uno_event = False
+
+ 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
 
@@ -2719,8 +2729,21 @@ class Board :
                         width +=150
 
                 if self.player_one_uno :
-                    uno = self.font.render("UNO!", 1, self.color)
-                    self.timer_Screen.blit(uno, (500, 400))
+                    if len(self.player_one_cards) == 1:
+                        uno = self.font.render("UNO!", 1, self.color)
+                        self.timer_Screen.blit(uno, (500, 400))
+                        self.player_one_uno_event = True
+
+                    elif len(self.player_one_cards) > 1 :
+                        if self.player_three_name != '' :
+                            if len(self.player_three_cards) == 1 and not self.player_three_uno_event :
+                                # If user forgot to start the UNO event, he will get two extra cards
+                                self.draw_cards_picks (self.player_three_cards, self.player_three_card_names, 2)
+
+                        elif self.player_three_name == '' and self.player_two_name != '' :
+                            if len(self.player_two_cards) == 1 and not self.player_two_uno_event :
+                            # If user forgot to start the UNO event, he will get two extra cards
+                                self.draw_cards_picks (self.player_two_cards, self.player_two_card_names, 2)
 
 
                 while self.choosed_wild :
@@ -2729,6 +2752,11 @@ class Board :
                            
 
             elif self.player_two_turn :
+
+            # Checks for loose of UNO condition
+                if len(self.player_two_cards) > 1 and self.player_two_uno_event  :
+                    self.player_two_uno_event = False            
+
 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
@@ -2763,13 +2791,30 @@ class Board :
                         width +=150
 
                 if self.player_two_uno :
-                    uno = self.font.render("UNO!", 1, self.color)
-                    self.timer_Screen.blit(uno, (500, 400))
+                    if len(self.player_two_cards) == 1:
+                        uno = self.font.render("UNO!", 1, self.color)
+                        self.timer_Screen.blit(uno, (500, 400))
+                        self.player_two_uno_event = True
+
+                    elif len(self.player_two_cards) > 1:
+                            if self.player_three_name != '' :
+                                if len(self.player_three_cards) == 1 and not self.player_three_uno_event :
+                                # If user forgot to start the UNO event, he will get two extra cards
+                                    self.draw_cards_picks (self.player_three_cards, self.player_three_card_names, 2)
+
+                            elif len(self.player_one_cards) == 1 and not self.player_one_uno_event :
+                                    # If user forgot to start the UNO event, he will get two extra cards
+                                    self.draw_cards_picks (self.player_one_cards, self.player_one_card_names, 2)
 
                 while self.choosed_wild :
                     self.screen.blit(colors, (350, 70))
 
+
             elif self.player_three_turn :
+
+                # Checks for loose of UNO condition
+                if len(self.player_three_cards) > 1 and self.player_three_uno_event  :
+                    self.player_three_uno_event = False
 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
@@ -2804,8 +2849,20 @@ class Board :
                         width +=150
 
                 if self.player_three_uno :
-                    uno = self.font.render("UNO!", 1, self.color)
-                    self.timer_Screen.blit(uno, (500, 400))
+                    if len(self.player_three_cards) == 1:
+                        uno = self.font.render("UNO!", 1, self.color)
+                        self.timer_Screen.blit(uno, (500, 400))
+                        self.player_three_uno_event = True
+
+                    elif len(self.player_three_cards) > 1 :
+                        if len(self.player_two_cards) == 1 and not self.player_two_uno_event :
+                            # If user forgot to start the UNO event, he will get two extra cards
+                            self.draw_cards_picks (self.player_two_cards, self.player_two_card_names, 2)
+
+                        elif len(self.player_one_cards) == 1 and not self.player_one_uno_event :
+                            # If user forgot to start the UNO event, he will get two extra cards
+                            self.draw_cards_picks (self.player_one_cards, self.player_one_card_names, 2)
+
 
                 while self.choosed_wild :
                     self.screen.blit(colors, (350, 70))
@@ -2829,8 +2886,9 @@ class Board :
             # Next Turn
             #pygame.draw.rect(self.screen, self.color, self.next_turn_rect)
 
-            # Check the cards
+            # Check possible winner 
             self.winner()
+
 
             pygame.display.flip()
 
@@ -2843,9 +2901,8 @@ class Board :
 
 
         pygame.display.update()
-    
 
-    
+
     def winner (self) :
 
         if len(self.player_one_cards) == 0 :
