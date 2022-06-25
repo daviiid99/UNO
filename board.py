@@ -2753,8 +2753,6 @@ class Board :
 
             if self.player_one_turn :
 
-                self.winner()
-
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
 
@@ -2790,14 +2788,13 @@ class Board :
                     uno = self.font.render("UNO!", 1, self.color)
                     self.timer_Screen.blit(uno, (500, 400))
 
+
                 while self.choosed_wild :
                     self.screen.blit(colors, (350, 70))
 
                            
 
             elif self.player_two_turn :
-
-                self.winner()
 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
@@ -2839,8 +2836,6 @@ class Board :
                     self.screen.blit(colors, (350, 70))
 
             elif self.player_three_turn :
-
-                self.winner()
 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
@@ -2900,12 +2895,15 @@ class Board :
             # Next Turn
             #pygame.draw.rect(self.screen, self.color, self.next_turn_rect)
 
+            # Check the cards
+            self.winner()
+
             pygame.display.flip()
 
     
 
     def winner_screen (self, player_name) :
-        player = self.font.render(player_name, 1, self.color)
+        uno = self.font.render(player_name, 1, BLACK)
         self.timer_Screen.blit(uno, (500, 400))
         clock.tick(5)
 
@@ -2915,24 +2913,34 @@ class Board :
 
     
     def winner (self) :
-        if self.player_one_name != '' :
-            if self.player_one_cards == 0 :
-                self.winner_screen(self.player_one_name)
+
+        if len(self.player_one_cards) == 0 :
+            if self.player_one_name != '' :
+                self.winner_screen(self.player_one_name + "WIN!")
                 game_values["START"]["TURN"] = "YES"
                 silent_save_game()
+                pygame.quit()
 
-        elif self.player_two_name != '' :
-            if self.player_two_cards  == 0 :
-                self.winner_screen(self.player_two_name)
+        elif len(self.player_two_cards)  == 0 :
+            if self.player_two_name != '' :
+                self.winner_screen(self.player_two_name + "WIN!")
                 game_values["START"]["TURN"] = "YES"
                 silent_save_game()
+                pygame.quit()
 
 
-        elif self.player_three_name != '' :
-            if self.player_three_cards == 0 :
-                self.winner_screen(self.player_three_name)
+        elif len(self.player_three_cards) == 0 :
+            if self.player_three_name != '' :
+                self.winner_screen(self.player_three_name + "WIN!")
                 game_values["START"]["TURN"] = "YES"
                 silent_save_game()
+                pygame.quit()
+
+        elif self.available_cards == 0 :
+            self.winner_screen("EVERYONE LOST!")
+            game_values["START"]["TURN"] = "YES"
+            silent_save_game()
+            pygame.quit()
 
 
     def playing(self) :
