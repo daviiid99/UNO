@@ -564,6 +564,10 @@ class Board :
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_one_name :
+                                self.next_turn()
+
+
                             else :
                                 self.next_turn()
 
@@ -610,6 +614,9 @@ class Board :
 
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_one_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -658,6 +665,9 @@ class Board :
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_one_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -701,6 +711,9 @@ class Board :
 
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_one_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -750,6 +763,9 @@ class Board :
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_one_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -795,6 +811,9 @@ class Board :
 
                             elif "reverse" in card_one_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_one_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -846,6 +865,9 @@ class Board :
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_two_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -891,6 +913,9 @@ class Board :
 
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_two_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -939,6 +964,9 @@ class Board :
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_two_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -984,6 +1012,9 @@ class Board :
 
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_two_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1032,6 +1063,9 @@ class Board :
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_two_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1077,6 +1111,9 @@ class Board :
 
                             elif "reverse" in card_two_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_two_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1126,6 +1163,9 @@ class Board :
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_three_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1171,6 +1211,9 @@ class Board :
 
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_three_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1219,6 +1262,9 @@ class Board :
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_three_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1264,6 +1310,9 @@ class Board :
 
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_three_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1312,6 +1361,9 @@ class Board :
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_three_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1357,6 +1409,9 @@ class Board :
 
                             elif "reverse" in card_three_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_three_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1406,6 +1461,9 @@ class Board :
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_four_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1452,6 +1510,9 @@ class Board :
 
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_four_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1500,6 +1561,9 @@ class Board :
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_four_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1545,6 +1609,9 @@ class Board :
 
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_four_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1593,6 +1660,9 @@ class Board :
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_four_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1638,6 +1708,9 @@ class Board :
 
                             elif "reverse" in card_four_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_four_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1687,6 +1760,9 @@ class Board :
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_five_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1733,6 +1809,9 @@ class Board :
 
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_five_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1781,6 +1860,9 @@ class Board :
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_five_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1826,6 +1908,9 @@ class Board :
 
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_five_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1875,6 +1960,9 @@ class Board :
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_five_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -1920,6 +2008,9 @@ class Board :
 
                             elif "reverse" in card_five_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_five_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -1970,6 +2061,9 @@ class Board :
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_six_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -2016,6 +2110,9 @@ class Board :
 
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_six_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -2065,6 +2162,9 @@ class Board :
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_six_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -2110,6 +2210,9 @@ class Board :
 
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_six_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -2158,6 +2261,9 @@ class Board :
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_six_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -2202,6 +2308,9 @@ class Board :
 
                             elif "reverse" in card_six_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_six_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -2250,6 +2359,9 @@ class Board :
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_seven_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -2294,6 +2406,9 @@ class Board :
 
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_seven_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -2341,6 +2456,9 @@ class Board :
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_seven_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -2385,6 +2503,9 @@ class Board :
 
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_seven_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -2432,6 +2553,9 @@ class Board :
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
 
+                            elif "draw" in card_seven_name :
+                                self.next_turn()
+
                             else :
                                 self.next_turn()
 
@@ -2476,6 +2600,9 @@ class Board :
 
                             elif "reverse" in card_seven_name :
                                 self.reverse_turn()
+
+                            elif "draw" in card_seven_name :
+                                self.next_turn()
 
                             else :
                                 self.next_turn()
@@ -2573,7 +2700,7 @@ class Board :
                     time = count_font.render("Time : %d " % self.timer, 1, self.color)
                     self.timer_Screen.blit(time, (475, 20))
                     self.timer -=1
-                    clock.tick(2)
+                    clock.tick(1)
                 
                 if self.timer == 0:
                     self.timer = 30
@@ -2626,6 +2753,8 @@ class Board :
 
             if self.player_one_turn :
 
+                self.winner()
+
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
 
@@ -2668,6 +2797,8 @@ class Board :
 
             elif self.player_two_turn :
 
+                self.winner()
+
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
 
@@ -2708,6 +2839,8 @@ class Board :
                     self.screen.blit(colors, (350, 70))
 
             elif self.player_three_turn :
+
+                self.winner()
 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
@@ -2769,7 +2902,7 @@ class Board :
 
             pygame.display.flip()
 
-    """
+    
 
     def winner_screen (self, player_name) :
         player = self.font.render(player_name, 1, self.color)
@@ -2778,9 +2911,9 @@ class Board :
 
 
         pygame.display.update()
-    """
+    
 
-    """
+    
     def winner (self) :
         if self.player_one_name != '' :
             if self.player_one_cards == 0 :
@@ -2800,8 +2933,6 @@ class Board :
                 self.winner_screen(self.player_three_name)
                 game_values["START"]["TURN"] = "YES"
                 silent_save_game()
-
-    """
 
 
     def playing(self) :
