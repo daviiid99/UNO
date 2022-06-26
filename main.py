@@ -11,6 +11,8 @@ from random import randint
 import random
 import json
 import threading
+import os.path
+from pathlib import Path
 
 os.system("pip3 install wget")
 os.system("pip3 install pygame")
@@ -40,6 +42,12 @@ from player import *
 
 # --------------------------------------
 
+# --------- Global variables ------------
+
+version = 1.5
+
+# ------------------------------
+
 def check_main_thread () :
         game_values["START"]["MAIN"]  = "NO"
         silent_save_game()
@@ -63,6 +71,19 @@ def create_title_screen_animation (LEFT_CARD, CENTER_CARD, RIGHT_CARD) :
     WIN.blit(RIGHT_CARD, (680, 340))
     WIN.blit(CENTER_CARD, (450, 280))
 
+    version = small_font.render("v1.5", 1, WHITE)
+    WIN.blit(version, (20, 20) )
+
+    updated = latest_version_installed()
+
+    if updated :
+        updates = mini_font.render("UNO is updated!", 1, WHITE)
+        WIN.blit(updates, (1080, 20) )
+
+    else  :
+        updates = mini_font.render("A new update is available!", 1, WHITE)
+        WIN.blit(updates, (1080, 20) )
+
     copyright = small_font.render("©1971-2022 MATTEL, INC", 1, WHITE)
     WIN.blit(copyright, (20, 600) )
 
@@ -79,6 +100,35 @@ def create_title_screen_animation (LEFT_CARD, CENTER_CARD, RIGHT_CARD) :
     clock.tick(1)
 
     pygame.display.update()
+
+def latest_version_installed() :
+    message = False
+
+    # Read the version string from an external text document
+    if platform.system() == "Linux" :
+        os.system("rm -f version.txt")
+    else :
+        os.system("del /f version.txt")
+
+    try:
+        wget.download("https://github.com/daviiid99/PyDroidGUI/raw/master/version.txt") 
+
+    except:
+        message = False
+
+    try :
+
+        version_str = Path('version.txt').read_text()
+        version_str = version_str.replace('\n', '')
+
+        # Check if the latest version is installed
+        if version_str == version :
+            message = True
+
+    except :
+        message = False
+
+    return message
 
 
 class Main :
