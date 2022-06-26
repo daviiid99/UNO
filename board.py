@@ -106,6 +106,144 @@ class Board :
         game_values["START"]["TURN"] = "NO"
         silent_save_game()
 
+    def assign_points(self, card_name) :
+
+        if "red" in card_name or "blue" in card_name or "orange"  in card_name or "green" in card_name:
+            if "skip" not in card_name and "reverse" not in card_name and "draw" not in card_name :
+
+                if "0" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=0
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=0
+
+                    else :
+                        self.player_three_points +=0
+
+
+                elif "1" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=1
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=1
+
+                    else :
+                        self.player_three_points +=1
+
+                elif "2" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=2
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=2
+
+                    else :
+                        self.player_three_points +=2
+
+                elif "3" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=3
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=3
+
+                    else :
+                        self.player_three_points +=3
+
+                elif "4" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=4
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=4
+
+                    else :
+                        self.player_three_points +=4
+
+                elif "5" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=5
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=5
+
+                    else :
+                        self.player_three_points +=5
+
+                elif "6" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=6
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=6
+
+                    else :
+                        self.player_three_points +=6
+
+                elif "7" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=7
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=7
+
+                    else :
+                        self.player_three_points +=7
+
+                elif "8" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=8
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=8
+
+                    else :
+                        self.player_three_points +=8
+
+                elif "9" in card_name :
+                    if self.player_one_turn :
+                        self.player_one_points +=9
+
+
+                    elif self.player_two_turn :
+                        self.player_two_points +=9
+
+                    else :
+                        self.player_three_points +=9
+
+            elif "skip" in card_name or "reverse" in card_name or "draw" in card_name :
+                if self.player_one_turn :
+                        self.player_one_points +=20
+
+
+                elif self.player_two_turn :
+                     self.player_two_points +=20
+
+                else :
+                    self.player_three_points +=20
+
+        elif "wild" in card_name :
+            if self.player_one_turn :
+                self.player_one_points +=50
+
+
+            elif self.player_two_turn :
+                self.player_two_points +=50
+
+            else :
+                self.player_three_points +=50
+
 
     def assign_players(self) :
         players = game_values["PLAYERS"]
@@ -189,6 +327,9 @@ class Board :
     def draw_cards_picks (self, player_cards, player_cards_names, count) :
         # Max number of cards at start
 
+        # Remove all the cards from the available counter
+        self.available_cards -=count
+
         while count > 0 :
 
             # Search for a random card
@@ -207,8 +348,6 @@ class Board :
 
             # Decrease the remaining cards counter
             count -=1
-
-        self.available_cards -=count
 
     def skip_turn(self) :
         if self.player_one_turn :
@@ -557,6 +696,9 @@ class Board :
                             self.player_one_cards.remove(card_one)
                             self.player_one_card_names.remove(card_one_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_one_name)
+
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
@@ -603,6 +745,9 @@ class Board :
                             # Remove the card from the player
                             self.player_one_cards.remove(card_one)
                             self.player_one_card_names.remove(card_one_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_one_name)
 
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
@@ -651,6 +796,9 @@ class Board :
                             self.player_two_cards.remove(card_one)
                             self.player_two_card_names.remove(card_one_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_one_name)
+
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
@@ -698,6 +846,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_one)
                             self.player_two_card_names.remove(card_one_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_one_name)
 
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
@@ -750,6 +901,9 @@ class Board :
                             self.player_three_cards.remove(card_one)
                             self.player_three_card_names.remove(card_one_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_one_name)
+
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
@@ -796,6 +950,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_one)
                             self.player_three_card_names.remove(card_one_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_one_name)
 
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
@@ -847,6 +1004,9 @@ class Board :
                             self.player_one_cards.remove(card_two)
                             self.player_one_card_names.remove(card_two_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_two_name)
+
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
@@ -892,6 +1052,9 @@ class Board :
                             # Remove the card from the player
                             self.player_one_cards.remove(card_two)
                             self.player_one_card_names.remove(card_two_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_two_name)
 
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
@@ -939,6 +1102,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_two)
                             self.player_two_card_names.remove(card_two_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_two_name)
 
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
@@ -989,6 +1155,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_two)
                             self.player_two_card_names.remove(card_two_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_two_name)
 
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
@@ -1041,6 +1210,9 @@ class Board :
                             self.player_three_cards.remove(card_two)
                             self.player_three_card_names.remove(card_two_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_two_name)
+
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
                                 self.draw_cards(2)
@@ -1086,6 +1258,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_two)
                             self.player_three_card_names.remove(card_two_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_two_name)
 
                             # Draw card ?
                             if "draw" in card_two_name and "4" not in card_two_name :
@@ -1135,6 +1310,9 @@ class Board :
                             self.player_one_cards.remove(card_three)
                             self.player_one_card_names.remove(card_three_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_three_name)
+
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
                                 self.draw_cards(2)
@@ -1180,6 +1358,9 @@ class Board :
                             # Remove the card from the player
                             self.player_one_cards.remove(card_three)
                             self.player_one_card_names.remove(card_three_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_three_name)
 
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
@@ -1227,6 +1408,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_three)
                             self.player_two_card_names.remove(card_three_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_three_name)
 
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
@@ -1277,6 +1461,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_three)
                             self.player_two_card_names.remove(card_three_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_three_name)
 
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
@@ -1329,6 +1516,9 @@ class Board :
                             self.player_three_cards.remove(card_three)
                             self.player_three_card_names.remove(card_three_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_three_name)
+
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
                                 self.draw_cards(2)
@@ -1374,6 +1564,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_three)
                             self.player_three_card_names.remove(card_three_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_three_name)
 
                             # Draw card ?
                             if "draw" in card_three_name and "4" not in card_three_name :
@@ -1423,6 +1616,9 @@ class Board :
                             self.player_one_cards.remove(card_four)
                             self.player_one_card_names.remove(card_four_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_four_name)
+
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
@@ -1470,6 +1666,9 @@ class Board :
                             self.player_one_cards.remove(card_four)
                             self.player_one_card_names.remove(card_four_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_four_name)
+
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
@@ -1516,6 +1715,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_four)
                             self.player_two_card_names.remove(card_four_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_four_name)
 
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
@@ -1566,6 +1768,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_four)
                             self.player_two_card_names.remove(card_four_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_four_name)
 
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
@@ -1618,6 +1823,9 @@ class Board :
                             self.player_three_cards.remove(card_four)
                             self.player_three_card_names.remove(card_four_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_four_name)
+
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
                                 self.draw_cards(2)
@@ -1663,6 +1871,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_four)
                             self.player_three_card_names.remove(card_four_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_four_name)
 
                             # Draw card ?
                             if "draw" in card_four_name and "4" not in card_four_name :
@@ -1712,6 +1923,9 @@ class Board :
                             self.player_one_cards.remove(card_five)
                             self.player_one_card_names.remove(card_five_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_five_name)
+
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
@@ -1759,6 +1973,9 @@ class Board :
                             self.player_one_cards.remove(card_five)
                             self.player_one_card_names.remove(card_five_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_five_name)
+
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
@@ -1805,6 +2022,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_five)
                             self.player_two_card_names.remove(card_five_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_five_name)
 
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
@@ -1855,6 +2075,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_five)
                             self.player_two_card_names.remove(card_five_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_five_name)
 
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
@@ -1908,6 +2131,9 @@ class Board :
                             self.player_three_cards.remove(card_five)
                             self.player_three_card_names.remove(card_five_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_five_name)
+
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
                                 self.draw_cards(2)
@@ -1953,6 +2179,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_five)
                             self.player_three_card_names.remove(card_five_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_five_name)
 
                             # Draw card ?
                             if "draw" in card_five_name and "4" not in card_five_name :
@@ -2003,6 +2232,9 @@ class Board :
                             self.player_one_cards.remove(card_six)
                             self.player_one_card_names.remove(card_six_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_six_name)
+
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
@@ -2049,6 +2281,9 @@ class Board :
                             # Remove the card from the player
                             self.player_one_cards.remove(card_six)
                             self.player_one_card_names.remove(card_six_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_six_name)
 
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
@@ -2100,6 +2335,9 @@ class Board :
                             self.player_two_cards.remove(card_six)
                             self.player_two_card_names.remove(card_six_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_six_name)
+
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
@@ -2149,6 +2387,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_six)
                             self.player_two_card_names.remove(card_six_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_six_name)
 
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
@@ -2201,6 +2442,9 @@ class Board :
                             self.player_three_cards.remove(card_six)
                             self.player_three_card_names.remove(card_six_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_six_name)
+
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
                                 self.draw_cards(2)
@@ -2245,6 +2489,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_six)
                             self.player_three_card_names.remove(card_six_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_six_name)
 
                             # Draw card ?
                             if "draw" in card_six_name and "4" not in card_six_name :
@@ -2294,6 +2541,9 @@ class Board :
                             self.player_one_cards.remove(card_seven)
                             self.player_one_card_names.remove(card_seven_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_seven_name)
+
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
                                 self.draw_cards(2)
@@ -2338,6 +2588,9 @@ class Board :
                             # Remove the card from the player
                             self.player_one_cards.remove(card_seven)
                             self.player_one_card_names.remove(card_seven_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_seven_name)
 
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
@@ -2384,6 +2637,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_seven)
                             self.player_two_card_names.remove(card_seven_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_seven_name)
 
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
@@ -2433,6 +2689,9 @@ class Board :
                             # Remove the card from the player
                             self.player_two_cards.remove(card_seven)
                             self.player_two_card_names.remove(card_seven_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_seven_name)
 
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
@@ -2484,6 +2743,9 @@ class Board :
                             self.player_three_cards.remove(card_seven)
                             self.player_three_card_names.remove(card_seven_name)
 
+                            # Assign the points to the card
+                            self.assign_points(card_seven_name)
+
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
                                 self.draw_cards(2)
@@ -2528,6 +2790,9 @@ class Board :
                             # Remove the card from the player
                             self.player_three_cards.remove(card_seven)
                             self.player_three_card_names.remove(card_seven_name)
+
+                            # Assign the points to the card
+                            self.assign_points(card_seven_name)
 
                             # Draw card ?
                             if "draw" in card_seven_name and "4" not in card_seven_name :
@@ -2700,6 +2965,9 @@ class Board :
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
 
+                score = count_font.render("Score : %d " % self.player_one_points, 1, self.color)
+                self.timer_Screen.blit(score, (50, 100))
+
                 player_one = self.font.render(self.player_one_name, 1, self.color)
                 cards = count_font.render("Your Cards : %d " % len(self.player_one_cards), 1, self.color)
                 self.screen.blit(cards, (850, 60))
@@ -2761,6 +3029,9 @@ class Board :
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
 
+                score = count_font.render("Score : %d " % self.player_two_points, 1, self.color)
+                self.timer_Screen.blit(score, (50, 100))
+
                 player_two = self.font.render(self.player_two_name, 1, self.color)
                 cards = count_font.render("Your Cards : %d " % len(self.player_two_cards), 1, self.color)
                 self.screen.blit(cards, (850, 60))
@@ -2818,6 +3089,9 @@ class Board :
 
                 time = count_font.render("Time : %d " % self.timer, 1, self.color)
                 self.timer_Screen.blit(time, (475, 20))
+
+                score = count_font.render("Score : %d " % self.player_three_points, 1, self.color)
+                self.timer_Screen.blit(score, (50, 100))
 
                 player_three = self.font.render(self.player_three_name, 1, self.color)
                 cards = count_font.render("Your Cards : %d " % len(self.player_three_cards), 1, self.color)
@@ -2889,7 +3163,6 @@ class Board :
             # Check possible winner 
             self.winner()
 
-
             pygame.display.flip()
 
     
@@ -2904,6 +3177,16 @@ class Board :
 
 
     def winner (self) :
+
+        # Check for no remaining cards
+
+        if self.available_cards == 0 :
+            self.winner_screen("EVERYONE LOST!")
+            game_values["START"]["TURN"] = "YES"
+            silent_save_game()
+
+        if self.player_one_points >= 500 or self.player_two_points >= 500 or self.player_three_points >=500 :
+            self.check_points_winner()
 
         if len(self.player_one_cards) == 0 :
             if self.player_one_name != '' :
@@ -2924,10 +3207,24 @@ class Board :
                 game_values["START"]["TURN"] = "YES"
                 silent_save_game()
 
-        elif self.available_cards == 0 :
-            self.winner_screen("EVERYONE LOST!")
+    def check_points_winner(self) :
+        # Check for the first to reach 500 points
+
+        if self.player_one_points >= 500 :
+            self.winner_screen(self.player_one_name + " WINS!")
             game_values["START"]["TURN"] = "YES"
             silent_save_game()
+
+        elif self.player_two_points >= 500 :
+            self.winner_screen(self.player_two_name + " WINS!")
+            game_values["START"]["TURN"] = "YES"
+            silent_save_game()
+
+        elif self.player_three_points >=500 :
+            self.winner_screen(self.player_three_name + " WINS!")
+            game_values["START"]["TURN"] = "YES"
+            silent_save_game()
+
 
 
     def playing(self) :
