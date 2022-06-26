@@ -680,6 +680,9 @@ class Board :
         while possible_UNO :
 
             for event in pygame.event.get() :
+
+                time +=1
+
                 # Closes the game
                 if event.type == pygame.QUIT:
                     game_values["START"]["TURN"] = "YES"
@@ -699,7 +702,6 @@ class Board :
                     possible_UNO = False
 
 
-                time +=1
 
     def check_click_uno(self, mouse) :
 
