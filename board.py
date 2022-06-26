@@ -350,135 +350,100 @@ class Board :
             count -=1
 
     def skip_turn(self) :
+
+        # Common defaults
+        self.current_turn_pick = False
+        self.next_seven = False
+        self.previous_seven = True
+        self.timer = 30
+
         if self.player_one_turn :
             if self.player_two_name != '' and self.player_three_name != '' :
                 self.player_one_turn = False
                 self.player_three_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
-                self.timer = 30
 
             elif self.player_three_name == '' :
                 self.player_one_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
-                self.timer = 30
 
         elif self.player_two_turn :
             if self.player_three_name != '' :
                 self.player_one_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
-                self.timer = 30
 
             elif self.player_three_name == '' :
                 self.player_two_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
-                self.timer = 30
 
         elif self.player_three_turn :
-                self.player_three_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
-                self.timer = 30
+                self.player_three_turn = False
+                self.player_two_turn = True
+                
 
     def reverse_turn(self) :
 
-        if self.player_one_turn :
-            self.current_turn_pick = False
-            self.next_seven = False
-            self.previous_seven = True
-            self.timer = 30
-
-        elif self.player_two_turn :
-            self.current_turn_pick = False
-            self.next_seven = False
-            self.previous_seven = True
-            self.timer = 30
-
-        elif self.player_three_turn :
-            self.current_turn_pick = False
-            self.next_seven = False
-            self.previous_seven = True
-            self.timer = 30
+        self.current_turn_pick = False
+        self.next_seven = False
+        self.previous_seven = True
+        self.timer = 30
 
 
     def next_turn (self) :
+
+        # Common defaults
+        self.current_turn_pick = False
+        self.next_seven = False
+        self.previous_seven = True
+
         if self.player_one_turn :
             if self.player_two_name != '' :
                 self.player_one_turn = False
                 self.player_two_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
                 self.timer = 30
 
         elif self.player_two_turn :
             if self.player_three_name != '' :
                 self.player_two_turn = False
                 self.player_three_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
                 self.timer = 30
 
 
             else :
                 self.player_two_turn = False
                 self.player_one_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
                 self.timer = 30
 
 
         elif self.player_three_turn :
             self.player_three_turn = False
             self.player_one_turn = True
-            self.current_turn_pick = False
-            self.next_seven = False
-            self.previous_seven = True
             self.timer = 30
 
     def draw_cards (self, count) :
+        # Common defaults
+        self.current_turn_pick = False
+        self.next_seven = False
+        self.previous_seven = True
+
         if self.player_one_turn :
+
             if self.player_two_name != '' :
                 if len(self.player_one_cards) > 1 :
                     self.player_two_turn = True
-                    self.current_turn_pick = False
-                    self.next_seven = False
-                    self.previous_seven = True
-
+                  
 
                 else :
                     self.player_control_uno()
                     self.player_two_turn = True
-                    self.current_turn_pick = False
-                    self.next_seven = False
-                    self.previous_seven = True
 
                 self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, count)
 
         elif self.player_two_turn :
+
             if self.player_three_name != '' :
                 if len(self.player_two_cards) > 1 :
                     self.player_three_turn = True
-                    self.current_turn_pick = False
-                    self.next_seven = False
-                    self.previous_seven = True
 
                 else :
                     self.player_control_uno()
                     self.player_three_turn = True
-                    self.current_turn_pick = False
-                    self.next_seven = False
-                    self.previous_seven = True
 
 
                 self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, count)
@@ -486,17 +451,11 @@ class Board :
             elif self.player_three_name == '' :
                 if len(self.player_two_cards) > 1 :
                     self.player_one_turn = True
-                    self.current_turn_pick = False
-                    self.next_seven = False
-                    self.previous_seven = True
 
 
                 else :
                     self.player_control_uno()
                     self.player_one_turn = True
-                    self.current_turn_pick = False
-                    self.next_seven = False
-                    self.previous_seven = True
 
                 self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, count)
 
@@ -505,16 +464,12 @@ class Board :
 
             if len(self.player_three_cards) > 1 :
                 self.player_one_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
+               
 
             else :
                 self.player_control_uno()
                 self.player_one_turn = True
-                self.current_turn_pick = False
-                self.next_seven = False
-                self.previous_seven = True
+              
 
             self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, count)
 
@@ -697,8 +652,6 @@ class Board :
 
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     self.check_click_uno(event.pos)
-
-                elif time >= 5 :
                     possible_UNO = False
 
 
@@ -707,14 +660,13 @@ class Board :
 
         if self.uno_rect.collidepoint(mouse):
             if self.player_one_turn :
-                self.player_one_uno = True
+                self.player_one_uno_event = True
 
             elif self.player_two_turn :
-                self.player_two_uno = True
+                self.player_two_uno_event = True
 
             else :
-                self.player_three_uno = True
-
+                self.player_three_uno_event = True
 
 
     def check_click(self, mouse):
@@ -924,6 +876,7 @@ class Board :
                             # Draw card ?
                             if "draw" in card_one_name and "4" not in card_one_name :
                                 self.draw_cards(2)
+
                                 if self.player_three_name != '' :
                                     self.next_turn()
 
