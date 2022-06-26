@@ -44,7 +44,7 @@ from player import *
 
 # --------- Global variables ------------
 
-version = 1.5
+version = "1.5"
 
 # ------------------------------
 
@@ -74,11 +74,9 @@ def create_title_screen_animation (LEFT_CARD, CENTER_CARD, RIGHT_CARD) :
     version = small_font.render("v1.5", 1, WHITE)
     WIN.blit(version, (20, 20) )
 
-    updated = latest_version_installed()
-
     if updated :
-        updates = mini_font.render("UNO is updated!", 1, WHITE)
-        WIN.blit(updates, (1080, 20) )
+        updates = mini_font.render("UNO is up-to-date!", 1, WHITE)
+        WIN.blit(updates, (1150, 20) )
 
     else  :
         updates = mini_font.render("A new update is available!", 1, WHITE)
@@ -111,7 +109,7 @@ def latest_version_installed() :
         os.system("del /f version.txt")
 
     try:
-        wget.download("https://github.com/daviiid99/PyDroidGUI/raw/master/version.txt") 
+        wget.download("https://raw.githubusercontent.com/daviiid99/UNO/master/version.txt") 
 
     except:
         message = False
@@ -130,6 +128,7 @@ def latest_version_installed() :
 
     return message
 
+updated = latest_version_installed()
 
 class Main :
     def __init__(self) :
