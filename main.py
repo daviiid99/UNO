@@ -71,7 +71,7 @@ def create_title_screen_animation (LEFT_CARD, CENTER_CARD, RIGHT_CARD) :
     WIN.blit(RIGHT_CARD, (680, 340))
     WIN.blit(CENTER_CARD, (450, 280))
 
-    version = small_font.render(version, 1, WHITE)
+    version = small_font.render("v1.6", 1, WHITE)
     WIN.blit(version, (20, 20) )
 
     if updated :
