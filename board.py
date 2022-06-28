@@ -1148,7 +1148,10 @@ class Board :
                                         self.draw_cards(2)
                                         self.player_control_uno()
 
-                                    self.next_turn()
+                                    if self.player_three_name != '' :
+                                        self.next_turn()
+
+                                    
 
 
                         else: 
@@ -1254,9 +1257,6 @@ class Board :
                                         self.draw_cards(2)
                                         self.player_control_uno()
 
-                                    self.next_turn()
-
-
                         else: 
 
                             if "wild" in card_one_name :
@@ -1357,7 +1357,7 @@ class Board :
                                         self.draw_cards(2)
                                         self.player_control_uno()
 
-                                    self.next_turn()
+                                   
 
             
                         else: 
@@ -1461,7 +1461,6 @@ class Board :
                                         self.draw_cards(2)
                                         self.player_control_uno()
 
-                                    self.next_turn()
 
                     
                         else: 
@@ -1562,7 +1561,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
 
                         
                             else: 
@@ -1664,7 +1662,9 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
 
                             else: 
 
@@ -1768,9 +1768,9 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
-                            
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+                                            
 
                             else: 
 
@@ -1876,8 +1876,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
                     
                             else: 
 
@@ -1976,8 +1974,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
 
                           
 
@@ -2080,8 +2076,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
 
                             else: 
 
@@ -2180,8 +2174,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
 
                             else: 
 
@@ -2282,8 +2274,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
                         
 
                             else: 
@@ -2383,8 +2375,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
                           
                             else: 
 
@@ -2483,8 +2475,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
 
                             
 
@@ -2585,7 +2575,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
 
     
 
@@ -2689,9 +2678,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
-                        
 
                             else: 
 
@@ -2790,9 +2776,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                     
 
                             else: 
@@ -2893,7 +2876,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
 
                             else: 
@@ -2993,8 +2977,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
                             
 
                             else: 
@@ -3095,8 +3079,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
 
                             else: 
 
@@ -3195,9 +3177,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
 
                             else: 
 
@@ -3298,9 +3277,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
             
 
                             else: 
@@ -3401,9 +3377,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                             
 
                             else: 
@@ -3505,7 +3478,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
                             else: 
 
@@ -3605,7 +3579,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
 
                             else: 
@@ -3708,7 +3683,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
 
                             else: 
 
@@ -3807,9 +3781,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                 
 
                             else: 
@@ -3912,9 +3883,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                             
                             else: 
 
@@ -4014,9 +3982,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                             
 
                             else: 
@@ -4121,7 +4086,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
                            
                             else: 
@@ -4225,7 +4191,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
                             
 
@@ -4330,8 +4297,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
                           
 
                             else: 
@@ -4430,9 +4395,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                             
 
                             else: 
@@ -4534,9 +4496,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                             
 
 
@@ -4636,9 +4595,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
-
                             
                             else: 
 
@@ -4739,7 +4695,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
                             
 
@@ -4842,7 +4799,8 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
 
                             else: 
 
@@ -4944,8 +4902,6 @@ class Board :
                                             self.draw_cards(2)
                                             self.player_control_uno()
 
-                                        self.next_turn()
-
                             else: 
 
                                 if "wild" in card_seven_name :
@@ -5042,8 +4998,6 @@ class Board :
                                         else :
                                             self.draw_cards(2)
                                             self.player_control_uno()
-
-                                        self.next_turn()
 
                             else: 
 
