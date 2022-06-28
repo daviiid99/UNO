@@ -502,7 +502,6 @@ class Board :
         # If a draw 4 card is used, next player looses his turn 
         if type_of_card == 4 :
             self.draw_4_counter +=1
-            self.skip_turn()
 
         # If a draw 2 card is used and doesn't exceed 2 cards, it will be count
         elif type_of_card == 2 :
