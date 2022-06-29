@@ -70,6 +70,7 @@ class Board :
         self.current_turn_pick = False
         self.next_seven = False
         self.previous_seven = True
+        self.again_seven = False
 
         self.card_one_rect = pygame.Rect(70, 400, 150, 361)
         self.card_two_rect = pygame.Rect(220, 400, 150, 361)
@@ -358,6 +359,7 @@ class Board :
 
         # Common defaults
         self.current_turn_pick = False
+        self.again_seven = False
         self.next_seven = False
         self.previous_seven = True
         self.timer = 30
@@ -385,6 +387,7 @@ class Board :
     def reverse_turn(self) :
 
         self.current_turn_pick = False
+        self.again_seven = False
         self.next_seven = False
         self.previous_seven = True
         self.timer = 30
@@ -462,6 +465,7 @@ class Board :
 
         # Common defaults
         self.current_turn_pick = False
+        self.again_seven = False
         self.next_seven = False
         self.previous_seven = True
 
@@ -760,13 +764,23 @@ class Board :
     def check_click(self, mouse):
         # Check if the user is looking for the previous cards
         if self.previous.collidepoint(mouse) :
-            self.previous_seven = True
-            self.next_seven = False
+            if self.next_seven :
+                self.previous_seven = True
+                self.next_seven = False
+
+            elif self.again_seven :
+                self.next_seven = True
+                self.again_seven = False
 
         # Check if the user is looking for the next cards
         elif self.next.collidepoint(mouse) :
-            self.next_seven = True
-            self.previous_seven = False
+            if self.previous_seven :
+                self.next_seven = True
+                self.previous_seven = False
+            
+            elif self.next_seven :
+                self.again_seven = True
+                self.next_seven = False
 
         # Check if the user is using the deck
         elif self.deck.collidepoint(mouse) :
@@ -986,6 +1000,188 @@ class Board :
                         # Assign the card
                         card_one = self.player_one_cards[7]
                         card_one_name = self.player_one_card_names[7]
+
+                        if "draw" in self.random_card_name and self.draw_first_time :
+                            if not "draw" in card_one_name and not "reverse" in card_one_name:
+                                self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                self.draw_counter = 0
+                                self.draw_amount = 0
+                                self.draw_first_time = False
+                                self.next_turn()
+
+                            elif "reverse" in card_one_name :
+                                    if "green" in card_one_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+
+                                    elif "blue" in card_one_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+
+                                    elif "orange" in card_one_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+
+                                    elif "red" in card_one_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_one, card_one_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                            else :
+
+                                if "draw" in card_one_name and "4" not in card_one_name :
+
+                                    # Replace the card
+                                    self.random_card = card_one
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_one)
+                                    self.player_one_card_names.remove(card_one_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_one_name)
+
+                                    if len(self.player_one_cards) > 1 :
+                                        self.draw_cards(2)
+                                        
+
+                                    else :
+                                        self.draw_cards(2)
+                                        self.player_control_uno()
+
+                                    self.next_turn()
+
+                        
+
+                        else: 
+
+                            if "wild" in card_one_name :
+                                isWild = True
+                                self.choosed_wild = True
+                                self.choosed_color()
+
+
+                            # Check if the card is compatible
+                            isValid = self.check_deck_card_compatibility(card_one_name)
+
+                            if isValid :
+
+                                # Replace the card
+                                self.random_card = card_one
+
+                                if not isWild:
+                                    self.random_card_name = card_one_name
+
+                                # Remove the card from the player
+                                self.player_one_cards.remove(card_one)
+                                self.player_one_card_names.remove(card_one_name)
+
+                                # Assign the points to the card
+                                self.assign_points(card_one_name)
+
+                                # Draw card ?
+                                if "draw" in card_one_name and "4" not in card_one_name :
+                                    self.draw_cards(2)
+                                    self.draw_first_time = True
+
+                                elif "draw" in card_one_name and "4" in card_one_name :
+                                    self.draw_cards(4)
+
+                                # Next turn
+                                if "skip" in card_one_name :
+                                    if len(self.player_one_cards) > 1 :
+                                        self.skip_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.skip_turn()
+
+                                elif "reverse" in card_one_name :
+                                    if len(self.player_one_cards) > 1 :
+                                        self.reverse_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.reverse_turn()
+
+
+                                elif "reverse" not in card_one_name and "skip" not in card_one_name and "draw" not in card_one_name   :
+                                    if len(self.player_one_cards) > 1 :
+                                        self.next_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.next_turn()
+
+                elif self.again_seven :
+                    if len(self.player_one_cards) >=15 :
+
+                        isWild = False
+
+                        # Assign the card
+                        card_one = self.player_one_cards[14]
+                        card_one_name = self.player_one_card_names[14]
 
                         if "draw" in self.random_card_name and self.draw_first_time :
                             if not "draw" in card_one_name and not "reverse" in card_one_name:
@@ -1464,6 +1660,158 @@ class Board :
                                         self.player_control_uno()
                                         self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_two_cards) >=15 :
+                        isWild = False
+
+
+                        # Assign the card
+                        card_one = self.player_two_cards[14]
+                        card_one_name = self.player_two_card_names[14]
+
+                        if "draw" in self.random_card_name and self.draw_first_time :
+                            if not "draw" in card_one_name and not "reverse" in card_one_name:
+                                self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                self.draw_counter = 0
+                                self.draw_amount = 0
+                                self.draw_first_time = False
+                                self.next_turn()
+
+                            elif "reverse" in card_one_name :
+                                    if "green" in card_one_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_one_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_one_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_one_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                            else :
+
+                                if "draw" in card_one_name and "4" not in card_one_name :
+
+                                    # Replace the card
+                                    self.random_card = card_one
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_one)
+                                    self.player_two_card_names.remove(card_one_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_one_name)
+
+                                    if len(self.player_two_cards) > 1 :
+                                        self.draw_cards(2)
+
+                                    else :
+                                        self.draw_cards(2)
+                                        self.player_control_uno()
+
+                                    if self.player_three_name != '' :
+                                        self.next_turn()
+
+                                    
+
+
+                        else: 
+
+                            if "wild" in card_one_name :
+                                isWild = True
+                                self.choosed_wild = True
+                                self.choosed_color()
+
+
+                            # Check if the card is compatible
+                            isValid = self.check_deck_card_compatibility(card_one_name)
+
+                            if isValid :
+
+                                # Replace the card
+                                self.random_card = card_one
+                                if not isWild:
+                                    self.random_card_name = card_one_name
+
+                                # Remove the card from the player
+                                self.player_two_cards.remove(card_one)
+                                self.player_two_card_names.remove(card_one_name)
+
+                                # Assign the points to the card
+                                self.assign_points(card_one_name)
+
+                                # Draw card ?
+                                if "draw" in card_one_name and "4" not in card_one_name :
+                                    self.draw_cards(2)
+                                    self.draw_first_time = True
+
+                                    if self.player_three_name != '' :
+                                        self.next_turn()
+
+                                elif "draw" in card_one_name and "4" in card_one_name :
+                                    self.draw_cards(4)
+
+                                    if self.player_three_name != '' :
+                                        self.next_turn()
+
+                                # Next turn
+                                if "skip" in card_one_name :
+                                    if len(self.player_two_cards) > 1 :
+                                        self.skip_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.skip_turn()
+
+                                elif "reverse" in card_one_name :
+                                    if len(self.player_two_cards) > 1 :
+                                        self.reverse_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.reverse_turn()
+
+
+                                elif "reverse" not in card_one_name and "skip" not in card_one_name and "draw" not in card_one_name   :
+                                    if len(self.player_two_cards) > 1 :
+                                        self.next_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.next_turn()
+
             elif self.player_three_turn :
                 if self.previous_seven :
                     if len(self.player_three_cards) >=1 :
@@ -1615,6 +1963,150 @@ class Board :
                         # Assign the card
                         card_one = self.player_three_cards[7]
                         card_one_name = self.player_three_card_names[7]
+
+                        if "draw" in self.random_card_name and self.draw_first_time :
+                            if not "draw" in card_one_name and not "reverse" in card_one_name:
+                                self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                self.draw_counter = 0
+                                self.draw_amount = 0
+                                self.draw_first_time = False
+                                self.next_turn()
+
+                            elif "reverse" in card_one_name :
+                                    if "green" in card_one_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_one_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_one_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_one_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_one, card_one_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                            else :
+
+                                if "draw" in card_one_name and "4" not in card_one_name :
+
+                                    # Replace the card
+                                    self.random_card = card_one
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_one)
+                                    self.player_three_card_names.remove(card_one_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_one_name)
+
+                                    if len(self.player_three_cards) > 1 :
+                                        self.draw_cards(2)
+
+                                    else :
+                                        self.draw_cards(2)
+                                        self.player_control_uno()
+
+                                   
+
+            
+                        else: 
+
+                            if "wild" in card_one_name :
+                                isWild = True
+                                self.choosed_wild = True
+                                self.choosed_color()
+
+
+                            # Check if the card is compatible
+                            isValid = self.check_deck_card_compatibility(card_one_name)
+
+                            if isValid :
+
+                                # Replace the card
+                                self.random_card = card_one
+                                if not isWild:
+                                    self.random_card_name = card_one_name
+
+                                # Remove the card from the player
+                                self.player_three_cards.remove(card_one)
+                                self.player_three_card_names.remove(card_one_name)
+
+                                # Assign the points to the card
+                                self.assign_points(card_one_name)
+
+                                # Draw card ?
+                                if "draw" in card_one_name and "4" not in card_one_name :
+                                    self.draw_cards(2)
+                                    self.draw_first_time = True
+
+                                elif "draw" in card_one_name and "4" in card_one_name :
+                                    self.draw_cards(4)
+
+                                # Next turn
+                                if "skip" in card_one_name :
+                                    if len(self.player_three_cards) > 1 :
+                                        self.skip_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.skip_turn()
+
+                                elif "reverse" in card_one_name :
+                                    if len(self.player_three_cards) > 1 :
+                                        self.reverse_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.reverse_turn()
+
+
+                                elif "reverse" not in card_one_name and "skip" not in card_one_name and "draw" not in card_one_name   :
+                                    if len(self.player_three_cards) > 1 :
+                                        self.next_turn()
+
+                                    else :
+                                        self.player_control_uno()
+                                        self.next_turn()
+
+            elif self.again_seven :
+                    if len(self.player_three_cards) >=15 :
+                        
+
+                        isWild = False
+
+                        # Assign the card
+                        card_one = self.player_three_cards[14]
+                        card_one_name = self.player_three_card_names[14]
 
                         if "draw" in self.random_card_name and self.draw_first_time :
                             if not "draw" in card_one_name and not "reverse" in card_one_name:
@@ -2111,6 +2603,184 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_one_cards) >=16 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_two = self.player_one_cards[15]
+                            card_two_name = self.player_one_card_names[15]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_two_name and not "reverse" in card_two_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_two_name :
+                                    if "green" in card_two_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+
+                                    elif "blue" in card_two_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+
+                                    elif "orange" in card_two_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+
+                                    elif "red" in card_two_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_two, card_two_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_two_name and "4" not in card_two_name :
+
+                                        # Replace the card
+                                        self.random_card = card_two
+
+                                        # Remove the card from the player
+                                        self.player_one_cards.remove(card_two)
+                                        self.player_one_card_names.remove(card_two_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_two_name)
+
+                                        if len(self.player_one_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+
+                        
+                            else: 
+
+                                if "wild" in card_two_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_two_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_two
+                                    if not isWild:
+                                        self.random_card_name = card_two_name
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_two)
+                                    self.player_one_card_names.remove(card_two_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_two_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_two_name and "4" not in card_two_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_two_name and "4" in card_two_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_two_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_two_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_two_name and "skip" not in card_two_name and "draw" not in card_two_name   :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_two_turn :
                 if self.previous_seven :
                     if len(self.player_two_cards) >=2 :
@@ -2411,6 +3081,155 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_two_cards) >=16 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_two = self.player_two_cards[15]
+                            card_two_name = self.player_two_card_names[15]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_two_name and not "reverse" in card_two_name:
+                                    self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_two_name :
+                                    if "green" in card_two_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_two_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_two_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_two_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_two_name and "4" not in card_two_name :
+
+                                        # Replace the card
+                                        self.random_card = card_two
+
+                                        # Remove the card from the player
+                                        self.player_two_cards.remove(card_two)
+                                        self.player_two_card_names.remove(card_two_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_two_name)
+
+                                        if len(self.player_two_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
+
+                            else: 
+
+                                if "wild" in card_two_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_two_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_two
+                                    if not isWild:
+                                        self.random_card_name = card_two_name
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_two)
+                                    self.player_two_card_names.remove(card_two_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_two_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_two_name and "4" not in card_two_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
+                                    elif "draw" in card_two_name and "4" in card_two_name :
+                                        self.draw_cards(4)
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
+                                    # Next turn
+                                    if "skip" in card_two_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_two_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_two_name and "skip" not in card_two_name and "draw" not in card_two_name   :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_three_turn :
                 if self.previous_seven :
                     if len(self.player_three_cards) >=2 :
@@ -2562,6 +3381,149 @@ class Board :
                             # Assign the card
                             card_two = self.player_three_cards[8]
                             card_two_name = self.player_three_card_names[8]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_two_name and not "reverse" in card_two_name:
+                                    self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_two_name :
+                                    if "green" in card_two_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_two_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_two_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_two_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_two, card_two_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+
+                                else :
+
+                                    if "draw" in card_two_name and "4" not in card_two_name :
+
+                                        # Replace the card
+                                        self.random_card = card_two
+
+                                        # Remove the card from the player
+                                        self.player_three_cards.remove(card_two)
+                                        self.player_three_card_names.remove(card_two_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_two_name)
+
+                                        if len(self.player_three_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                          
+
+                            else: 
+
+                                if "wild" in card_two_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_two_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_two
+                                    if not isWild:
+                                        self.random_card_name = card_two_name
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_two)
+                                    self.player_three_card_names.remove(card_two_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_two_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_two_name and "4" not in card_two_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_two_name and "4" in card_two_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_two_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_two_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_two_name and "skip" not in card_two_name and "draw" not in card_two_name   :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
+            elif self.again_seven :
+                    if len(self.player_three_cards) >=16 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_two = self.player_three_cards[15]
+                            card_two_name = self.player_three_card_names[15]
 
                             if "draw" in self.random_card_name and self.draw_first_time :
                                 if not "draw" in card_two_name and not "reverse" in card_two_name:
@@ -3053,6 +4015,183 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.next_seven :
+                    if len(self.player_one_cards) >=17 :
+
+
+                            isWild = False
+
+                            # Assign the card
+                            card_three = self.player_one_cards[16]
+                            card_three_name = self.player_one_card_names[16]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_three_name and not "reverse" in card_three_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_three_name :
+                                    if "green" in card_three_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+
+                                    elif "blue" in card_three_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+
+                                    elif "orange" in card_three_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+
+                                    elif "red" in card_three_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_three, card_three_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_three_name and "4" not in card_three_name :
+
+                                        # Replace the card
+                                        self.random_card = card_three
+
+                                        # Remove the card from the player
+                                        self.player_one_cards.remove(card_three)
+                                        self.player_one_card_names.remove(card_three_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_three_name)
+
+                                        if len(self.player_one_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                            else: 
+
+                                if "wild" in card_three_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_three_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_three
+                                    if not isWild:
+                                        self.random_card_name = card_three_name
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_three)
+                                    self.player_one_card_names.remove(card_three_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_three_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_three_name and "4" not in card_three_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_three_name and "4" in card_three_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_three_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_three_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_three_name and "skip" not in card_three_name and "draw" not in card_three_name   :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_two_turn :
                 if self.previous_seven :
                     if len(self.player_two_cards) >=3 :
@@ -3342,6 +4481,149 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_two_cards) >=17 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_three = self.player_two_cards[16]
+                            card_three_name = self.player_two_card_names[16]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_three_name and not "reverse" in card_three_name:
+                                    self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_three_name :
+                                    if "green" in card_three_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_three_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_three_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_three_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_three_name and "4" not in card_three_name :
+
+                                        # Replace the card
+                                        self.random_card = card_three
+
+                                        # Remove the card from the player
+                                        self.player_two_cards.remove(card_three)
+                                        self.player_two_card_names.remove(card_three_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_three_name)
+
+                                        if len(self.player_two_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+                          
+                            else: 
+
+                                if "wild" in card_three_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_three_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_three
+                                    if not isWild:
+                                        self.random_card_name = card_three_name
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_three)
+                                    self.player_two_card_names.remove(card_three_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_three_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_three_name and "4" not in card_three_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_three_name and "4" in card_three_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_three_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_three_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_three_name and "skip" not in card_three_name and "draw" not in card_three_name   :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_three_turn :
                 if self.previous_seven :
                     if len(self.player_three_cards) >=3 :
@@ -3493,6 +4775,149 @@ class Board :
                             # Assign the card
                             card_three = self.player_three_cards[9]
                             card_three_name = self.player_three_card_names[9]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_three_name and not "reverse" in card_three_name:
+                                    self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_three_name :
+                                    if "green" in card_three_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_three_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_three_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_three_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_three, card_three_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_three_name and "4" not in card_three_name :
+
+                                        # Replace the card
+                                        self.random_card = card_three
+
+                                        # Remove the card from the player
+                                        self.player_three_cards.remove(card_three)
+                                        self.player_three_card_names.remove(card_three_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_three_name)
+
+                                        if len(self.player_three_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+
+    
+
+                            else: 
+
+                                if "wild" in card_three_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_three_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_three
+                                    if not isWild:
+                                        self.random_card_name = card_three_name
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_three)
+                                    self.player_three_card_names.remove(card_three_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_three_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_three_name and "4" not in card_three_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_three_name and "4" in card_three_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_three_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_three_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_three_name and "skip" not in card_three_name and "draw" not in card_three_name   :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
+            elif self.again_seven :
+                    if len(self.player_three_cards) >=17 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_three = self.player_three_cards[16]
+                            card_three_name = self.player_three_card_names[16]
 
                             if "draw" in self.random_card_name and self.draw_first_time :
                                 if not "draw" in card_three_name and not "reverse" in card_three_name:
@@ -3986,6 +5411,184 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_one_cards) >=18 :
+
+                            isWild = False
+
+
+                            # Assign the card
+                            card_four = self.player_one_cards[17]
+                            card_four_name = self.player_one_card_names[17]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_four_name and not "reverse" in card_four_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_four_name :
+                                    if "green" in card_four_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+
+                                    elif "blue" in card_four_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+
+                                    elif "orange" in card_four_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+
+                                    elif "red" in card_four_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_four, card_four_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_four_name and "4" not in card_four_name :
+
+                                        # Replace the card
+                                        self.random_card = card_four
+
+                                        # Remove the card from the player
+                                        self.player_one_cards.remove(card_four)
+                                        self.player_one_card_names.remove(card_four_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_four_name)
+
+                                        if len(self.player_one_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+                    
+
+                            else: 
+
+                                if "wild" in card_four_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_four_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_four
+                                    if not isWild:
+                                        self.random_card_name = card_four_name
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_four)
+                                    self.player_one_card_names.remove(card_four_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_four_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_four_name and "4" not in card_four_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_four_name and "4" in card_four_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_four_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_four_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_four_name and "skip" not in card_four_name and "draw" not in card_four_name   :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_two_turn :
                 if self.previous_seven :
                     if len(self.player_two_cards) >=4 :
@@ -4275,6 +5878,150 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_two_cards) >=18 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_four = self.player_two_cards[17]
+                            card_four_name = self.player_two_card_names[17]
+
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_four_name and not "reverse" in card_four_name:
+                                    self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_four_name :
+                                    if "green" in card_four_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_four_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_four_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_four_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_four_name and "4" not in card_four_name :
+
+                                        # Replace the card
+                                        self.random_card = card_four
+
+                                        # Remove the card from the player
+                                        self.player_two_cards.remove(card_four)
+                                        self.player_two_card_names.remove(card_four_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_four_name)
+
+                                        if len(self.player_two_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+                            
+
+                            else: 
+
+                                if "wild" in card_four_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_four_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_four
+                                    if not isWild:
+                                        self.random_card_name = card_four_name
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_four)
+                                    self.player_two_card_names.remove(card_four_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_four_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_four_name and "4" not in card_four_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_four_name and "4" in card_four_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_four_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_four_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_four_name and "skip" not in card_four_name and "draw" not in card_four_name   :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_three_turn :
                 if self.previous_seven :
                     if len(self.player_three_cards) >=4 :
@@ -4425,6 +6172,147 @@ class Board :
                             # Assign the card
                             card_four = self.player_three_cards[10]
                             card_four_name = self.player_three_card_names[10]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_four_name and not "reverse" in card_four_name:
+                                    self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_four_name :
+                                    if "green" in card_four_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_four_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_four_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_four_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_four, card_four_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_four_name and "4" not in card_four_name :
+
+                                        # Replace the card
+                                        self.random_card = card_four
+
+                                        # Remove the card from the player
+                                        self.player_three_cards.remove(card_four)
+                                        self.player_three_card_names.remove(card_four_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_four_name)
+
+                                        if len(self.player_three_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                            else: 
+
+                                if "wild" in card_four_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_four_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_four
+                                    if not isWild:
+                                        self.random_card_name = card_four_name
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_four)
+                                    self.player_three_card_names.remove(card_four_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_four_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_four_name and "4" not in card_four_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_four_name and "4" in card_four_name :
+                                        self.draw_cards(4)
+
+                                # Next turn
+                                    if "skip" in card_four_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_four_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_four_name and "skip" not in card_four_name and "draw" not in card_four_name   :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
+            elif self.again_seven :
+                    if len(self.player_three_cards) >=18 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_four = self.player_three_cards[17]
+                            card_four_name = self.player_three_card_names[17]
 
                             # Check if the previous card is a draw card
                             if "draw" in self.random_card_name and self.draw_first_time :
@@ -4917,6 +6805,185 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+
+                    if len(self.player_one_cards) >=19 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_five = self.player_one_cards[18]
+                            card_five_name = self.player_one_card_names[18]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_five_name and not "reverse" in card_five_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_five_name :
+                                    if "green" in card_five_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+
+                                    elif "blue" in card_five_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+
+                                    elif "orange" in card_five_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+
+                                    elif "red" in card_five_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_five, card_five_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_five_name and "4" not in card_five_name :
+
+                                        # Replace the card
+                                        self.random_card = card_five
+
+                                        # Remove the card from the player
+                                        self.player_one_cards.remove(card_five)
+                                        self.player_one_card_names.remove(card_five_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_five_name)
+
+                                        if len(self.player_one_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+                            
+
+                            else: 
+
+                                if "wild" in card_five_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_five_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_five
+                                    if not isWild:
+                                        self.random_card_name = card_five_name
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_five)
+                                    self.player_one_card_names.remove(card_five_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_five_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_five_name and "4" not in card_five_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_five_name and "4" in card_five_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_five_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_five_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_five_name and "skip" not in card_five_name and "draw" not in card_five_name   :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_two_turn :
                 if self.previous_seven :
                     if len(self.player_two_cards) >=5 :
@@ -5207,6 +7274,151 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_two_cards) >=19 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_five = self.player_two_cards[18]
+                            card_five_name = self.player_two_card_names[18]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_five_name and not "reverse" in card_five_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_five_name :
+                                    if "green" in card_five_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_five_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_five_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_five_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_five_name and "4" not in card_five_name :
+
+                                        # Replace the card
+                                        self.random_card = card_five
+
+                                        # Remove the card from the player
+                                        self.player_two_cards.remove(card_five)
+                                        self.player_two_card_names.remove(card_five_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_five_name)
+
+                                        if len(self.player_two_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
+
+                            else: 
+
+                                if "wild" in card_five_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_five_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_five
+                                    if not isWild:
+                                        self.random_card_name = card_five_name
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_five)
+                                    self.player_two_card_names.remove(card_five_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_five_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_five_name and "4" not in card_five_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_five_name and "4" in card_five_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_five_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_five_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_five_name and "skip" not in card_five_name and "draw" not in card_five_name   :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_three_turn :
                 if self.previous_seven :
 
@@ -5359,6 +7571,148 @@ class Board :
                             # Assign the card
                             card_five = self.player_three_cards[11]
                             card_five_name = self.player_three_card_names[11]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_five_name and not "reverse" in card_five_name:
+                                    self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_five_name :
+                                    if "green" in card_five_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_five_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_five_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_five_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_five, card_five_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_five_name and "4" not in card_five_name :
+
+                                        # Replace the card
+                                        self.random_card = card_five
+
+                                        # Remove the card from the player
+                                        self.player_three_cards.remove(card_five)
+                                        self.player_three_card_names.remove(card_five_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_five_name)
+
+                                        if len(self.player_three_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+                
+
+                            else: 
+
+                                if "wild" in card_five_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_five_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_five
+                                    if not isWild:
+                                        self.random_card_name = card_five_name
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_five)
+                                    self.player_three_card_names.remove(card_five_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_five_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_five_name and "4" not in card_five_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_five_name and "4" in card_five_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_five_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_five_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_five_name and "skip" not in card_five_name and "draw" not in card_five_name   :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
+            elif self.again_seven :
+                    if len(self.player_three_cards) >=19 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_five = self.player_three_cards[18]
+                            card_five_name = self.player_three_card_names[18]
 
                             # Check if the previous card is a draw card
                             if "draw" in self.random_card_name and self.draw_first_time :
@@ -5856,6 +8210,189 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+
+                    if len(self.player_one_cards) >=20 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_six = self.player_one_cards[19]
+                            card_six_name = self.player_one_card_names[19]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_six_name and not "reverse" in card_six_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+
+                                elif "reverse" in card_six_name :
+                                    if "green" in card_six_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+
+                                    elif "blue" in card_six_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+
+                                    elif "orange" in card_six_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+
+                                    elif "red" in card_six_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_six, card_six_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+
+                                else :
+
+                                    if "draw" in card_six_name and "4" not in card_six_name :
+
+                                        # Replace the card
+                                        self.random_card = card_six
+
+                                        # Remove the card from the player
+                                        self.player_one_cards.remove(card_six)
+                                        self.player_one_card_names.remove(card_six_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_six_name)
+
+                                        if len(self.player_one_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+                            
+
+                            else: 
+
+                                if "wild" in card_six_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_six_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_six
+                                    if not isWild:
+                                        self.random_card_name = card_six_name
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_six)
+                                    self.player_one_card_names.remove(card_six_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_six_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_six_name and "4" not in card_six_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+                                       
+
+                                    elif "draw" in card_six_name and "4" in card_six_name :
+                                        self.draw_cards(4)
+                                        
+
+                                    # Next turn
+                                    if "skip" in card_six_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_six_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_six_name and "skip" not in card_six_name and "draw" not in card_six_name   :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_two_turn :
                 if self.previous_seven :
 
@@ -6153,6 +8690,154 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+
+                    if len(self.player_two_cards) >=20 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_six = self.player_two_cards[19]
+                            card_six_name = self.player_two_card_names[19]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_six_name and not "reverse" in card_six_name:
+                                    self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_six_name :
+                                    if "green" in card_six_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_six_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_six_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_six_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_six_name and "4" not in card_six_name :
+
+                                        # Replace the card
+                                        self.random_card = card_six
+
+                                        # Remove the card from the player
+                                        self.player_two_cards.remove(card_six)
+                                        self.player_two_card_names.remove(card_six_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_six_name)
+
+                                        if len(self.player_two_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
+                            
+
+
+                            else: 
+
+                                if "wild" in card_six_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_six_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_six
+                                    if not isWild:
+                                        self.random_card_name = card_six_name
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_six)
+                                    self.player_two_card_names.remove(card_six_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_six_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_six_name and "4" not in card_six_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+                                        
+
+                                    elif "draw" in card_six_name and "4" in card_six_name :
+                                        self.draw_cards(4)
+                                        
+                                     # Next turn
+                                    if "skip" in card_six_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_six_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_six_name and "skip" not in card_six_name and "draw" not in card_six_name   :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_three_turn :
                 if self.previous_seven :
 
@@ -6305,6 +8990,150 @@ class Board :
                             # Assign the card
                             card_six = self.player_three_cards[12]
                             card_six_name = self.player_three_card_names[12]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_six_name and not "reverse" in card_six_name:
+                                    self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                
+                                elif "reverse" in card_six_name :
+                                    if "green" in card_six_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+
+                                    elif "blue" in card_six_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+
+                                    elif "orange" in card_six_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+
+                                    elif "red" in card_six_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_six, card_six_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+
+                                else :
+
+                                    if "draw" in card_six_name and "4" not in card_six_name :
+
+                                        # Replace the card
+                                        self.random_card = card_six
+
+                                        # Remove the card from the player
+                                        self.player_three_cards.remove(card_six)
+                                        self.player_three_card_names.remove(card_six_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_seven_name)
+
+                                        if len(self.player_three_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+                            
+
+                            else: 
+
+                                if "wild" in card_six_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_six_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_six
+                                    if not isWild:
+                                        self.random_card_name = card_six_name
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_six)
+                                    self.player_three_card_names.remove(card_six_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_six_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_six_name and "4" not in card_six_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_six_name and "4" in card_six_name :
+                                        self.draw_cards(4)
+
+
+                                    # Next turn
+                                    if "skip" in card_six_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_six_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_six_name and "skip" not in card_six_name and "draw" not in card_six_name   :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
+            elif self.again_seven :
+                    if len(self.player_three_cards) >=20 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_six = self.player_three_cards[19]
+                            card_six_name = self.player_three_card_names[19]
 
                             # Check if the previous card is a draw card
                             if "draw" in self.random_card_name and self.draw_first_time :
@@ -6795,6 +9624,181 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_one_cards) >=21 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_seven = self.player_one_cards[20]
+                            card_seven_name = self.player_one_card_names[20]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_seven_name and not "reverse" in card_seven_name:
+                                    self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_seven_name :
+                                    if "green" in card_seven_name and "green" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+
+
+                                    elif "blue" in card_seven_name and "blue" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                    elif "orange" in card_seven_name and "orange" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                    elif "red" in card_seven_name and "red" in self.random_card_name :
+                                        if self.player_three_name != '' :
+                                            self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                        else :
+                                            self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                            self.draw_counter = 0
+                                            self.draw_amount = 0
+                                            self.draw_first_time = False
+                                            self.update_deck_card(card_seven, card_seven_name)
+                                            self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_seven_name and "4" not in card_seven_name :
+
+                                        # Replace the card
+                                        self.random_card = card_seven
+
+                                        # Remove the card from the player
+                                        self.player_one_cards.remove(card_seven)
+                                        self.player_one_card_names.remove(card_seven_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_seven_name)
+
+                                        if len(self.player_one_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+                            
+                            else: 
+
+                                if "wild" in card_seven_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_seven_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_seven
+                                    if not isWild:
+                                        self.random_card_name = card_seven_name
+
+                                    # Remove the card from the player
+                                    self.player_one_cards.remove(card_seven)
+                                    self.player_one_card_names.remove(card_seven_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_seven_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_seven_name and "4" not in card_seven_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_seven_name and "4" in card_seven_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_seven_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_seven_name :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_seven_name and "skip" not in card_seven_name and "draw" not in card_seven_name   :
+                                        if len(self.player_one_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
             elif self.player_two_turn :
                 if self.previous_seven :
                     if len(self.player_two_cards) >=7 :
@@ -6949,6 +9953,148 @@ class Board :
                             # Assign the card
                             card_seven = self.player_two_cards[13]
                             card_seven_name = self.player_two_card_names[13]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_seven_name and not "reverse" in card_seven_name:
+                                    self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_seven_name :
+                                    if "green" in card_seven_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    elif "blue" in card_seven_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    elif "orange" in card_seven_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    elif "red" in card_seven_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_one_cards, self.player_one_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+                                else :
+
+                                    if "draw" in card_seven_name and "4" not in card_seven_name :
+
+                                        # Replace the card
+                                        self.random_card = card_seven
+
+                                        # Remove the card from the player
+                                        self.player_two_cards.remove(card_seven)
+                                        self.player_two_card_names.remove(card_seven_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_seven_name)
+
+                                        if len(self.player_two_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                                        if self.player_three_name != '' :
+                                            self.next_turn()
+
+                            else: 
+
+                                if "wild" in card_seven_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_seven_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_seven
+                                    if not isWild:
+                                        self.random_card_name = card_seven_name
+
+                                    # Remove the card from the player
+                                    self.player_two_cards.remove(card_seven)
+                                    self.player_two_card_names.remove(card_seven_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_seven_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_seven_name and "4" not in card_seven_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+                                        
+
+                                    elif "draw" in card_seven_name and "4" in card_seven_name :
+                                        self.draw_cards(4)
+                                        
+
+                                    # Next turn
+                                    if "skip" in card_seven_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_seven_name :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_seven_name and "skip" not in card_seven_name and "draw" not in card_seven_name   :
+                                        if len(self.player_two_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
+                elif self.again_seven :
+                    if len(self.player_two_cards) >=21 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_seven = self.player_two_cards[20]
+                            card_seven_name = self.player_two_card_names[20]
 
                             # Check if the previous card is a draw card
                             if "draw" in self.random_card_name and self.draw_first_time :
@@ -7359,6 +10505,144 @@ class Board :
                                             self.player_control_uno()
                                             self.next_turn()
 
+                elif self.again_seven :
+                    if len(self.player_three_cards) >=21 :
+
+                            isWild = False
+
+                            # Assign the card
+                            card_seven = self.player_three_cards[20]
+                            card_seven_name = self.player_three_card_names[20]
+
+                            # Check if the previous card is a draw card
+                            if "draw" in self.random_card_name and self.draw_first_time :
+                                if not "draw" in card_seven_name and not "reverse" in card_seven_name:
+                                    self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                    self.draw_counter = 0
+                                    self.draw_amount = 0
+                                    self.draw_first_time = False
+                                    self.next_turn()
+
+                                elif "reverse" in card_seven_name :
+                                    if "green" in card_seven_name and "green" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    elif "blue" in card_seven_name and "blue" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    elif "orange" in card_seven_name and "orange" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    elif "red" in card_seven_name and "red" in self.random_card_name :
+                                        self.draw_cards_picks(self.player_two_cards, self.player_two_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.update_deck_card(card_seven, card_seven_name)
+                                        self.next_turn()
+
+                                    else :
+                                        self.draw_cards_picks(self.player_three_cards, self.player_three_card_names, self.draw_amount)
+                                        self.draw_counter = 0
+                                        self.draw_amount = 0
+                                        self.draw_first_time = False
+                                        self.next_turn()
+
+
+                                else :
+
+                                    if "draw" in card_seven_name and "4" not in card_seven_name :
+
+                                        # Replace the card
+                                        self.random_card = card_seven
+
+                                        # Remove the card from the player
+                                        self.player_three_cards.remove(card_seven)
+                                        self.player_three_card_names.remove(card_seven_name)
+
+                                        # Assign the points to the card
+                                        self.assign_points(card_seven_name)
+
+                                        if len(self.player_three_cards) > 1 :
+                                            self.draw_cards(2)
+
+                                        else :
+                                            self.draw_cards(2)
+                                            self.player_control_uno()
+
+                            else: 
+
+                                if "wild" in card_seven_name :
+                                    isWild = True
+                                    self.choosed_wild = True
+                                    self.choosed_color()
+
+                                # Check if the card is compatible
+                                isValid = self.check_deck_card_compatibility(card_seven_name)
+
+                                if isValid :
+
+                                    # Replace the card
+                                    self.random_card = card_seven
+                                    if not isWild:
+                                        self.random_card_name = card_seven_name
+
+                                    # Remove the card from the player
+                                    self.player_three_cards.remove(card_seven)
+                                    self.player_three_card_names.remove(card_seven_name)
+
+                                    # Assign the points to the card
+                                    self.assign_points(card_seven_name)
+
+                                    # Draw card ?
+                                    if "draw" in card_seven_name and "4" not in card_seven_name :
+                                        self.draw_cards(2)
+                                        self.draw_first_time = True
+
+                                    elif "draw" in card_seven_name and "4" in card_seven_name :
+                                        self.draw_cards(4)
+
+                                    # Next turn
+                                    if "skip" in card_seven_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.skip_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.skip_turn()
+
+                                    elif "reverse" in card_seven_name :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.reverse_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.reverse_turn()
+
+
+                                    elif "reverse" not in card_seven_name and "skip" not in card_seven_name and "draw" not in card_seven_name   :
+                                        if len(self.player_three_cards) > 1 :
+                                            self.next_turn()
+
+                                        else :
+                                            self.player_control_uno()
+                                            self.next_turn()
+
     def update_deck_card(self, card, card_name) :
         # Replace the card
         self.random_card = card
@@ -7566,6 +10850,18 @@ class Board :
                         count +=1
                         width +=150
 
+
+                elif self.again_seven :
+
+                    width = 20
+                    count = 0
+                  
+                    for card in self.player_one_cards :
+                        if count >= 14 and count < 21 :
+                            self.screen.blit(card, (50 + width , 400))
+                            width +=150
+                        count +=1
+
                 if self.player_one_uno :
                     if len(self.player_one_cards) == 1:
                         uno = self.font.render("UNO!", 1, self.color)
@@ -7631,6 +10927,17 @@ class Board :
                         count +=1
                         width +=150
 
+                elif self.again_seven :
+
+                    width = 20
+                    count = 0
+                  
+                    for card in self.player_two_cards :
+                        if count >= 14 and count < 21 :
+                            self.screen.blit(card, (50 + width , 400))
+                            width +=150
+                        count +=1
+
                 if self.player_two_uno :
                     if len(self.player_two_cards) == 1:
                         uno = self.font.render("UNO!", 1, self.color)
@@ -7691,6 +10998,17 @@ class Board :
                             self.screen.blit(card, (50 + width , 400))
                         count +=1
                         width +=150
+
+                elif self.again_seven :
+
+                    width = 20
+                    count = 0
+                  
+                    for card in self.player_three_cards :
+                        if count >= 14 and count < 21 :
+                            self.screen.blit(card, (50 + width , 400))
+                            width +=150
+                        count +=1
 
                 if self.player_three_uno :
                     if len(self.player_three_cards) == 1:
